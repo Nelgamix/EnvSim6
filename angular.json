@@ -133,6 +133,43 @@
           }
         }
       }
+    },
+    "worldsim": {
+      "root": "projects/worldsim",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "project": "projects/worldsim/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/worldsim/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/worldsim/src/test.ts",
+            "tsConfig": "projects/worldsim/tsconfig.spec.json",
+            "karmaConfig": "projects/worldsim/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/worldsim/tsconfig.lint.json",
+              "projects/worldsim/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   }
 }
