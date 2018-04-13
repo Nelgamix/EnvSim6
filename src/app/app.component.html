@@ -3,6 +3,12 @@
 <div>
   <h2>List of objects in env</h2>
   <ul>
-    <li *ngFor="let o of worldsimService.world.objects">{{ o.name }}</li>
+    <li *ngFor="let o of worldsimService.world.objects">{{ o.name }} at {{ o.position.x }},{{ o.position.y }}</li>
+  </ul>
+</div>
+<div>
+  <h2>List of locations in env</h2>
+  <ul>
+    <li *ngFor="let l of worldsimService.world.locations"><app-show-location [location]="l"></app-show-location></li>
   </ul>
 </div>

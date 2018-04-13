@@ -1,11 +1,12 @@
 import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {AppComponent, ShowLocationComponent} from './app.component';
 import {WorldsimService} from '../../projects/worldsim/src/lib/worldsim.service';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        ShowLocationComponent
       ],
       providers: [
         WorldsimService

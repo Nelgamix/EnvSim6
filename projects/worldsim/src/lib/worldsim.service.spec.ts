@@ -24,13 +24,86 @@ describe('WorldsimService', () => {
           },
           'name': 'mini-test',
           'state': '#FFE'
+        },
+        {
+          'type': 'Lamp',
+          'position': {
+            'x': 10,
+            'y': 120
+          },
+          'name': 'Philips LMP1',
+          'state': 'off'
         }
       ],
       'locations': [
+        {
+          'name': 'Entree',
+          'width': 100,
+          'height': 200,
+          'position': {
+            x: 0,
+            y: 0
+          }
+        },
+        {
+          'name': 'Chambre 1',
+          'width': 400,
+          'height': 400,
+          'position': {
+            x: 100,
+            y: 200
+          },
+          'personnages': [{name: 'Lucas'}]
+        }
       ]
     };
 
     service.loadEnvironment(obj);
-    expect(service.world.objects.length).toEqual(1);
+
+    expect(service.world.objects.length).toEqual(2);
+    expect(service.world.locations.length).toEqual(2);
+  }));
+
+  it('should construct from recursion correctly', inject([WorldsimService], (service: WorldsimService) => {
+    service.loadEnvironment({
+      locations: [
+        {
+          name: 'Root',
+          width: 30,
+          height: 30,
+          position: {
+            x: 0,
+            y: 0
+          },
+          sublocations: [
+            {
+              name: 'Rec 1',
+              width: 20,
+              height: 20,
+              position: {
+                x: 0,
+                y: 0
+              },
+              sublocations: [
+                {
+                  name: 'Rec 2',
+                  width: 10,
+                  height: 10,
+                  position: {
+                    x: 0,
+                    y: 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    });
+
+    expect(service.world.locations.length).toEqual(1);
+    expect(service.world.locations[0].name).toEqual('Root');
+    expect(service.world.locations[0].sublocations[0].name).toEqual('Rec 1');
+    expect(service.world.locations[0].sublocations[0].sublocations[0].name).toEqual('Rec 2');
   }));
 });

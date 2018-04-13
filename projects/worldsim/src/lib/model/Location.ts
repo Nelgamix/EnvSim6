@@ -10,7 +10,15 @@ export class Location {
   private _personnages: Personnage[];
   private _sublocations: Location[];
 
-  constructor(name: string, width: number, height: number, metadata: any, position: Position, personnages: Personnage[], sublocations: Location[]) {
+  constructor(
+    name: string,
+    width: number,
+    height: number,
+    position: Position,
+    metadata: any,
+    personnages: Personnage[],
+    sublocations: Location[]
+  ) {
     this._name = name;
     this._width = width;
     this._height = height;
@@ -46,5 +54,13 @@ export class Location {
 
   get sublocations(): Location[] {
     return this._sublocations;
+  }
+
+  addPersonnage(p: Personnage) {
+    this._personnages.push(p);
+  }
+
+  addSublocation(sl: Location) {
+    this._sublocations.push(sl);
   }
 }
