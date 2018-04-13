@@ -21,7 +21,7 @@ export class WorldsimService {
       for (const o of env.objects) {
         switch (o.type) {
           case 'Lamp':
-            this._world.addObject(new Lamp(o.name, new Position(o.position.x, o.position.y), o.state));
+            this._world.addReceiver(new Lamp(o.name, new Position(o.position.x, o.position.y), o.state));
             break;
         }
       }
