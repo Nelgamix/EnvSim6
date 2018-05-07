@@ -63,7 +63,7 @@ describe('WorldsimService', () => {
     service.loadEnvironment(obj);
 
     expect(service.world.receivers.length).toEqual(2);
-    expect(service.world.emmiters.length).toEqual(0);
+    expect(service.world.emitters.length).toEqual(0);
     expect(service.world.locations.length).toEqual(2);
   }));
 

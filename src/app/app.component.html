@@ -4,7 +4,7 @@
   <h2>List of emitters<span style="display: block; font-size: 60%">Emitters can <i>send</i> data to the server</span></h2>
   <small></small>
   <ul>
-    <li *ngFor="let o of worldsimService.world.emmiters">{{ o.name }} at {{ o.position.x }},{{ o.position.y }}</li>
+    <li *ngFor="let o of worldsimService.world.emitters">{{ o.name }} at {{ o.position.x }},{{ o.position.y }}</li>
   </ul>
 </div>
 <div>
@@ -21,4 +21,9 @@
   <ul>
     <li *ngFor="let l of worldsimService.world.locations"><app-show-location [location]="l"></app-show-location></li>
   </ul>
+</div>
+
+<div>
+  <h2>Location Map (Beta)</h2>
+  <app-show-map [world]="worldsimService.world" [magnificationX]="3" [magnificationY]="2"></app-show-map>
 </div>

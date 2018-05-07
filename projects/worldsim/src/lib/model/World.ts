@@ -1,16 +1,15 @@
 import {Location} from './Location';
-import {Obj} from './Obj';
 import {Emitter} from './Emitter';
 import {Receiver} from './Receiver';
 
 export class World {
   private readonly _locations: Location[];
-  private readonly _emmiters: Emitter[];
+  private readonly _emitters: Emitter[];
   private readonly _receivers: Receiver[];
 
   constructor() {
     this._locations = [];
-    this._emmiters = [];
+    this._emitters = [];
     this._receivers = [];
   }
 
@@ -19,7 +18,7 @@ export class World {
   }
 
   public addEmmiter(emmiter: Emitter) {
-    this._emmiters.push(emmiter);
+    this._emitters.push(emmiter);
   }
 
   public addReceiver(receiver: Receiver) {
@@ -30,11 +29,33 @@ export class World {
     return this._locations;
   }
 
-  get emmiters(): Emitter[] {
-    return this._emmiters;
+  get emitters(): Emitter[] {
+    return this._emitters;
   }
 
   get receivers(): Receiver[] {
     return this._receivers;
+  }
+
+  calculateHeight(): number {
+    let h = 0;
+    for (const l of this.locations) {
+      if (h < l.height + l.position.y) {
+        h = l.height + l.position.y;
+      }
+    }
+
+    return h;
+  }
+
+  calculateWidth(): number {
+    let w = 0;
+    for (const l of this.locations) {
+      if (w < l.width + l.position.x) {
+        w = l.width + l.position.x;
+      }
+    }
+
+    return w;
   }
 }
