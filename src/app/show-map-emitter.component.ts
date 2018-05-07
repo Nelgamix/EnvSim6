@@ -8,4 +8,6 @@ import {Emitter} from '../../projects/worldsim/src/lib/model/Emitter';
 })
 export class ShowMapEmitterComponent {
   @Input() emitter: Emitter;
+  @Input() magnificationX: number;
+  @Input() magnificationY: number;
 }

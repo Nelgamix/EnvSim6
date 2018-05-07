@@ -11,8 +11,7 @@
   <h2>List of receivers<span style="display: block; font-size: 60%">Receiver can <i>receive</i> data from the server</span></h2>
   <ul>
     <li *ngFor="let o of worldsimService.world.receivers">
-      {{ o.name }} at {{ o.position.x }},{{ o.position.y }}
-      <pre>{{ o.data | json }}</pre>
+      {{ o.name }} at {{ o.position.x }}, {{ o.position.y }}
     </li>
   </ul>
 </div>
@@ -25,5 +24,15 @@
 
 <div>
   <h2>Location Map (Beta)</h2>
-  <app-show-map [world]="worldsimService.world" [magnificationX]="3" [magnificationY]="2"></app-show-map>
+  <app-show-map
+    style="float: left; margin-bottom: 50px"
+    [onConfigure]="onConfigureBinded"
+    [world]="worldsimService.world"
+    [magnificationX]="magnificationX"
+    [magnificationY]="magnificationY">
+  </app-show-map>
+  <app-configure
+    style="float: left; margin-left: 20px"
+    [obj]="configure">
+  </app-configure>
 </div>

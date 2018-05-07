@@ -120,7 +120,8 @@ describe('WorldsimService', () => {
             y: 0
           },
           name: 'Samsung Truc #1',
-          state: '#84ff81'
+          color: '#84ff81',
+          intensity: 1
         },
         {
           type: 'Lamp',
@@ -129,7 +130,8 @@ describe('WorldsimService', () => {
             y: 120
           },
           name: 'Philips LMP1',
-          state: 'off'
+          color: '#fff',
+          intensity: 0.2
         }
       ]
     });
@@ -139,11 +141,13 @@ describe('WorldsimService', () => {
     // Test object 1
     expect(service.world.receivers[0].name).toEqual('Samsung Truc #1');
     expect(service.world.receivers[0].position).toEqual(new Position(0, 0));
-    expect((<Lamp> service.world.receivers[0]).data.state).toEqual('#84ff81');
+    expect((<Lamp> service.world.receivers[0]).color).toEqual('#84ff81');
+    expect((<Lamp> service.world.receivers[0]).intensity).toEqual(1);
 
     // Test object 2
     expect(service.world.receivers[1].name).toEqual('Philips LMP1');
     expect(service.world.receivers[1].position).toEqual(new Position(10, 120));
-    expect((<Lamp> service.world.receivers[1]).data.state).toEqual('off');
+    expect((<Lamp> service.world.receivers[1]).color).toEqual('#fff');
+    expect((<Lamp> service.world.receivers[1]).intensity).toEqual(0.2);
   }));
 });

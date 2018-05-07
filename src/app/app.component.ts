@@ -3,6 +3,7 @@ import {WorldsimService} from '../../projects/worldsim/src/lib/worldsim.service'
 import {Emitter} from '../../projects/worldsim/src/lib/model/Emitter';
 import {Receiver} from '../../projects/worldsim/src/lib/model/Receiver';
 import {Lamp} from '../../projects/worldsim/src/lib/model/Lamp';
+import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
 
 @Component({
   selector: 'app-show-location',
@@ -27,26 +28,50 @@ export class AppComponent {
   readonly magnificationX: number = 3;
   readonly magnificationY: number = 2;
 
+  configure: Obj;
+
   constructor(public worldsimService: WorldsimService) {
     this.worldsimService.loadEnvironment({
       'objects': [
         {
           'type': 'Lamp',
           'position': {
-            'x': 0,
-            'y': 0
+            'x': 260,
+            'y': 270
           },
-          'name': 'mini-test',
-          'state': '#FFE'
+          'name': 'Lampe du salon',
+          'color': '#fff',
+          'intensity': 0.8
         },
         {
           'type': 'Lamp',
           'position': {
-            'x': 120,
-            'y': 120
+            'x': 4,
+            'y': 220
           },
-          'name': 'Philips LMP1',
-          'state': 'off'
+          'name': 'Lampe de Chambre 1',
+          'color': '#f55',
+          'intensity': 0.5
+        },
+        {
+          'type': 'Lamp',
+          'position': {
+            'x': 4,
+            'y': 270
+          },
+          'name': 'Lampe de Chambre 2',
+          'color': '#55f',
+          'intensity': 0.5
+        },
+        {
+          'type': 'TV',
+          'position': {
+            'x': 260,
+            'y': 100
+          },
+          'name': 'TV du salon',
+          'channel': 1,
+          'volume': 0.2
         }
       ],
       'locations': [
@@ -145,5 +170,14 @@ export class AppComponent {
         }
       ]
     });
+  }
+
+  onConfigure(param: Obj): void {
+    this.configure = param;
+    console.log(param);
+  }
+
+  get onConfigureBinded() {
+    return this.onConfigure.bind(this);
   }
 }

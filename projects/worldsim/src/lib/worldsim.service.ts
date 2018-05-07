@@ -5,6 +5,8 @@ import {Lamp} from './model/Lamp';
 import {Position} from './model/Position';
 import {Personnage} from './model/Personnage';
 import {Location} from './model/Location';
+import {Speakers} from './model/Speakers';
+import {TV} from './model/TV';
 
 @Injectable(/*{
   providedIn: WorldsimModule
@@ -21,7 +23,13 @@ export class WorldsimService {
       for (const o of env.objects) {
         switch (o.type) {
           case 'Lamp':
-            this._world.addReceiver(new Lamp(o.name, new Position(o.position.x, o.position.y), o.state));
+            this._world.addReceiver(new Lamp(o.name, new Position(o.position.x, o.position.y), o.color, o.intensity));
+            break;
+          case 'Speakers':
+            this._world.addReceiver(new Speakers(o.name, new Position(o.position.x, o.position.y), o.volume));
+            break;
+          case 'TV':
+            this._world.addReceiver(new TV(o.name, new Position(o.position.x, o.position.y), o.channel, o.volume));
             break;
         }
       }
