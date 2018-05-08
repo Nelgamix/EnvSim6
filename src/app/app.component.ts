@@ -1,17 +1,29 @@
-import {Component, HostListener, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {WorldsimService} from '../../projects/worldsim/src/lib/worldsim.service';
-import {Emitter} from '../../projects/worldsim/src/lib/model/Emitter';
-import {Receiver} from '../../projects/worldsim/src/lib/model/Receiver';
-import {Lamp} from '../../projects/worldsim/src/lib/model/Lamp';
+import {Lamp} from '../../projects/worldsim/src/lib/model/receiver/Lamp';
 import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
+import {Location} from '../../projects/worldsim/src/lib/model/Location';
 
 @Component({
   selector: 'app-show-location',
+  styles: [
+    `
+      .red {
+        color: red;
+      }
+      .green {
+        color: limegreen;
+      }
+    `
+  ],
   template: `
-    {{ location.name }} -> {{ location.width }}x{{ location.height }}
-    at [{{ location.position.x + ', ' + location.position.y }}]
+    <b>{{ location.name }}</b> &rArr;
+    <span class="red">{{ location.width }}x{{ location.height }}</span>
+    at <span class="green">({{ location.position.x + ', ' + location.position.y }})</span>
     <ul *ngIf="location.sublocations.length > 0">
-      <li *ngFor="let l of location.sublocations"><app-show-location [location]="l"></app-show-location></li>
+      <li *ngFor="let l of location.sublocations">
+        <app-show-location [location]="l"></app-show-location>
+      </li>
     </ul>
   `
 })
@@ -72,6 +84,15 @@ export class AppComponent {
           'name': 'TV du salon',
           'channel': 1,
           'volume': 0.2
+        },
+        {
+          'type': 'Thermometer',
+          'position': {
+            'x': 260,
+            'y': 10
+          },
+          'name': 'Thermometre du salon',
+          'temperature': 22
         }
       ],
       'locations': [
@@ -174,7 +195,6 @@ export class AppComponent {
 
   onConfigure(param: Obj): void {
     this.configure = param;
-    console.log(param);
   }
 
   get onConfigureBinded() {

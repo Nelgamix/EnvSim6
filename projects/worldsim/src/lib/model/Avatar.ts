@@ -1,4 +1,4 @@
-export class Personnage {
+export class Avatar {
   private _name: string;
   private _metadata: any;
 

@@ -2,3 +2,14 @@
   position: absolute;
   border: 1px solid black;
 }
+
+#es-listing {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#es-map {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}

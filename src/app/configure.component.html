@@ -1,0 +1,20 @@
+<div id="container">
+  <h3 id="title">Configure panel</h3>
+
+  <div *ngIf="obj != null">
+    <p>
+      Configure {{obj.name}}
+    </p>
+
+    <app-configure-lamp *ngIf="Lamp.isInstance(obj)" [lamp]="obj"></app-configure-lamp>
+    <app-configure-thermometer *ngIf="Thermometer.isInstance(obj)" [thermometer]="obj"></app-configure-thermometer>
+  </div>
+
+  <div *ngIf="obj == null" id="description">
+    <p>
+      Here, you can configure an emitter.
+      Please click (without dragging) an emitter on the map,
+      and you will be able to see and change any value of it.
+    </p>
+  </div>
+</div>

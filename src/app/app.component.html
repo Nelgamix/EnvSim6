@@ -1,38 +1,46 @@
 <h1 style="text-align: center; background-color: #828282; color: white;">Env Sim</h1>
+
 <p>Env Sim: Environment simulator for my M1 Info. It simulates the environment. To use with CCBL server.</p>
-<div>
-  <h2>List of emitters<span style="display: block; font-size: 60%">Emitters can <i>send</i> data to the server</span></h2>
-  <small></small>
-  <ul>
-    <li *ngFor="let o of worldsimService.world.emitters">{{ o.name }} at {{ o.position.x }},{{ o.position.y }}</li>
-  </ul>
-</div>
-<div>
-  <h2>List of receivers<span style="display: block; font-size: 60%">Receiver can <i>receive</i> data from the server</span></h2>
-  <ul>
-    <li *ngFor="let o of worldsimService.world.receivers">
-      {{ o.name }} at {{ o.position.x }}, {{ o.position.y }}
-    </li>
-  </ul>
-</div>
-<div>
-  <h2>List of locations</h2>
-  <ul>
-    <li *ngFor="let l of worldsimService.world.locations"><app-show-location [location]="l"></app-show-location></li>
-  </ul>
+
+<div id="es-listing">
+  <div>
+    <h2>List of emitters<span style="display: block; font-size: 60%">Emitters can <i>send</i> data to the server</span></h2>
+    <ul>
+      <li *ngFor="let o of worldsimService.world.emitters">
+        <b>{{ o.name }}</b> at ({{ o.position.x }}, {{ o.position.y }})
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>List of receivers<span style="display: block; font-size: 60%">Receiver can <i>receive</i> data from the server</span></h2>
+    <ul>
+      <li *ngFor="let o of worldsimService.world.receivers">
+        <b>{{ o.name }}</b> at ({{ o.position.x }}, {{ o.position.y }})
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>List of locations</h2>
+    <ul>
+      <li *ngFor="let l of worldsimService.world.locations">
+        <app-show-location [location]="l"></app-show-location>
+      </li>
+    </ul>
+  </div>
 </div>
 
-<div>
-  <h2>Location Map (Beta)</h2>
+<h2>Location Map (Beta)</h2>
+<div id="es-map">
   <app-show-map
-    style="float: left; margin-bottom: 50px"
     [onConfigure]="onConfigureBinded"
     [world]="worldsimService.world"
     [magnificationX]="magnificationX"
     [magnificationY]="magnificationY">
   </app-show-map>
+
   <app-configure
-    style="float: left; margin-left: 20px"
     [obj]="configure">
   </app-configure>
 </div>

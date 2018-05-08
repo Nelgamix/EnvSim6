@@ -1,0 +1,16 @@
+#container {
+  padding: 0 20px 10px 20px;
+  margin: 0 40px;
+  background-color: #eee;
+  border: 2px solid #444;
+  width: 300px;
+}
+
+#title {
+  text-align: center;
+}
+
+#description {
+  text-align: justify;
+  font-style: italic;
+}

@@ -1,4 +1,4 @@
-import {Personnage} from './Personnage';
+import {Avatar} from './Avatar';
 import {Position} from './Position';
 
 export class Location {
@@ -7,7 +7,7 @@ export class Location {
   private _height: number;
   private _metadata: any;
   private _position: Position;
-  private _personnages: Personnage[];
+  private _personnages: Avatar[];
   private _sublocations: Location[];
 
   constructor(
@@ -16,7 +16,7 @@ export class Location {
     height: number,
     position: Position,
     metadata: any,
-    personnages: Personnage[],
+    personnages: Avatar[],
     sublocations: Location[]
   ) {
     this._name = name;
@@ -48,7 +48,7 @@ export class Location {
     return this._position;
   }
 
-  get personnages(): Personnage[] {
+  get personnages(): Avatar[] {
     return this._personnages;
   }
 
@@ -56,7 +56,7 @@ export class Location {
     return this._sublocations;
   }
 
-  addPersonnage(p: Personnage) {
+  addPersonnage(p: Avatar) {
     this._personnages.push(p);
   }
 

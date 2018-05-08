@@ -7,22 +7,30 @@ export class World {
   private readonly _emitters: Emitter[];
   private readonly _receivers: Receiver[];
 
+  private readonly _observers: ((any) => void)[];
+
   constructor() {
     this._locations = [];
     this._emitters = [];
     this._receivers = [];
+    this._observers = [];
   }
 
   public addLocation(location: Location) {
     this._locations.push(location);
   }
 
-  public addEmmiter(emmiter: Emitter) {
-    this._emitters.push(emmiter);
+  public addEmmiter(emitter: Emitter) {
+    this._emitters.push(emitter);
+    emitter.onChanged = (e: Emitter) => this.emitterChanged(e);
   }
 
   public addReceiver(receiver: Receiver) {
     this._receivers.push(receiver);
+  }
+
+  public addObserver(f: (any: any) => void): void {
+    this._observers.push(f);
   }
 
   get locations(): Location[] {
@@ -57,5 +65,11 @@ export class World {
     }
 
     return w;
+  }
+
+  emitterChanged(e: Emitter): void {
+    for (const f of this._observers) {
+      f(e);
+    }
   }
 }

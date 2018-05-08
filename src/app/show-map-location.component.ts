@@ -1,12 +1,21 @@
 import {Component, HostListener, Input} from '@angular/core';
 import {Location} from '../../projects/worldsim/src/lib/model/Location';
+import {Utils} from './utils';
 
 @Component({
   selector: 'app-show-map-location',
   styles: [`
     .ws-location {
       position: absolute;
-      /*border: 1px solid black;*/
+    }
+    .ws-location::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      border: 2px solid black;
     }
     .ws-location-name {
       position: absolute;
@@ -31,7 +40,7 @@ import {Location} from '../../projects/worldsim/src/lib/model/Location';
         [magnificationX]="magnificationX">
       </app-show-map-location>
       <span *ngIf="location.sublocations.length === 0" class="ws-location-name">
-        {{location.name}}
+        <b>{{location.name}}</b>
         <span *ngFor="let p of location.personnages">
           <br>
           <i class="material-icons">person_pin</i>{{p.name}}
@@ -41,7 +50,7 @@ import {Location} from '../../projects/worldsim/src/lib/model/Location';
   `
 })
 export class ShowMapLocationComponent {
-  color: string = this.randomColor();
+  color: string = Utils.randomColor();
 
   @Input() location: Location;
   @Input() magnificationX: number;
@@ -49,12 +58,5 @@ export class ShowMapLocationComponent {
 
   @HostListener('click') onClick() {
     console.log(this.location.name);
-  }
-
-  randomColor(): string {
-    return 'rgb(' +
-      Math.floor(64 + Math.random() * 192) + ', ' +
-      Math.floor(64 + Math.random() * 192) + ', ' +
-      Math.floor(64 + Math.random() * 192) + ')';
   }
 }

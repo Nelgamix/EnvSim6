@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Lamp} from '../../projects/worldsim/src/lib/model/Lamp';
-import {TV} from '../../projects/worldsim/src/lib/model/TV';
+import {Lamp} from '../../projects/worldsim/src/lib/model/receiver/Lamp';
+import {TV} from '../../projects/worldsim/src/lib/model/receiver/TV';
 import {Receiver} from '../../projects/worldsim/src/lib/model/Receiver';
 
 @Component({

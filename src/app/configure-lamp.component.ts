@@ -1,17 +1,36 @@
 import {Component, Input} from '@angular/core';
-import {Lamp} from '../../projects/worldsim/src/lib/model/Lamp';
+import {Lamp} from '../../projects/worldsim/src/lib/model/receiver/Lamp';
 
 @Component({
   selector: 'app-configure-lamp',
+  styles: [
+    `
+      .full-width {
+        width: 100%;
+      }
+    `
+  ],
   template: `
-    <div>
-      <form>
-        <label for="color">Color:</label>
-        <input type="text" [(ngModel)]="lamp.color" name="color"> <br>
-        <label for="intensity">Intensity:</label>
-        <input type="number" [(ngModel)]="lamp.intensity" name="intensity" step="0.05" min="0" max="1">
-      </form>
-    </div>
+    <form>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          name="lamp-color"
+          placeholder="Color"
+          [(ngModel)]="lamp.color">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          name="lamp-intensity"
+          placeholder="Intensity"
+          [(ngModel)]="lamp.intensity"
+          type="number"
+          step="0.05"
+          min="0"
+          max="1">
+      </mat-form-field>
+    </form>
   `
 })
 export class ConfigureLampComponent {

@@ -1,19 +1,8 @@
 import {Component, HostListener, Input} from '@angular/core';
-import {TV} from '../../projects/worldsim/src/lib/model/TV';
+import {TV} from '../../projects/worldsim/src/lib/model/receiver/TV';
 
 @Component({
   selector: 'app-show-map-tv',
-  styles: [`
-    .no-select {
-      -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-      -khtml-user-select: none; /* Konqueror HTML */
-      -moz-user-select: none; /* Firefox */
-      -ms-user-select: none; /* Internet Explorer/Edge */
-      user-select: none; /* Chrome and Opera */
-      cursor: w-resize;
-    }
-  `],
   template: `
     <div style="width: 96px" class="no-select" [style.background-color]="background">
       <div style="width: 36px; display: inline-block">

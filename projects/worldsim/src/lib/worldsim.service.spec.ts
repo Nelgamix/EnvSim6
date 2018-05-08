@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { WorldsimService } from './worldsim.service';
-import {Lamp} from './model/Lamp';
+import {Lamp} from './model/receiver/Lamp';
 import {Position} from './model/Position';
 
 describe('WorldsimService', () => {
