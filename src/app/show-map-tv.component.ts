@@ -5,7 +5,7 @@ import {ShowMapObjectModifiable} from './show-map-object-modifiable';
 @Component({
   selector: 'app-show-map-tv',
   template: `
-    <div style="width: 96px" class="no-select" [style.background-color]="background">
+    <div style="width: 96px" [ngStyle]="styles">
       <div style="width: 36px; display: inline-block">
         <i class="material-icons md-36" style="display: inline">tv</i>
       </div>

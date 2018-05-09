@@ -9,17 +9,21 @@ export class ShowMapObjectModifiable {
   protected mOn = false;
   protected last: MouseEvent;
   protected modifier = 0;
-  protected background = 'none';
+  //protected background = 'none';
+  protected styles = {
+    background: 'none',
+    cursor: 'w-resize'
+  };
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.background = '#aaa8';
+    this.styles.background = '#aaa8';
     this.mOn = true;
 
     this.mouseEnter();
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    this.background = '#fff0';
+    this.styles.background = '#fff0';
     this.mDown = false;
     this.mOn = false;
 

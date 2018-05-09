@@ -11,7 +11,6 @@ body {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Chrome and Opera */
-  cursor: w-resize;
 }
 
 /* Rules for sizing the icon. */

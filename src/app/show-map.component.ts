@@ -11,6 +11,7 @@ import {World} from '../../projects/worldsim/src/lib/model/World';
   `],
   template: `
     <div id="container"
+         class="no-select"
          alx-dragdrop
          [style.height]="world.calculateHeight() * magnificationY + 'px'"
          [style.width]="world.calculateWidth() * magnificationX + 'px'">

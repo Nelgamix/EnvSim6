@@ -26,7 +26,22 @@ import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
       font-size: 130%;
     }
     .can-drop {
-      z-index: 10;
+    }
+    .can-drop::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 2;
+      border: 2px solid red;
+    }
+    .ws-avatar {
+      cursor: pointer;
+    }
+    .ws-avatar:hover {
+      color: red;
     }
   `],
   template: `
@@ -49,7 +64,7 @@ import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
       <span *ngIf="location.sublocations.length === 0" class="ws-location-name">
         <b>{{location.name}}</b>
         <span *ngFor="let a of location.avatars"
-              style="cursor: pointer"
+              class="ws-avatar"
               [alx-draggable]="a"
               (alx-drag-end)="endDragged($event)">
           <br>
@@ -60,7 +75,7 @@ import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
   `
 })
 export class ShowMapLocationComponent {
-  color: string = Utils.randomColor();
+  color: string = Utils.randomColor(80);
 
   @Input() location: Location;
   @Input() magnificationX: number;

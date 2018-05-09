@@ -6,7 +6,7 @@ import {Utils} from './utils';
 @Component({
   selector: 'app-show-map-thermometer',
   template: `
-    <div style="width: 96px" class="no-select" [style.background-color]="background">
+    <div style="width: 96px" [ngStyle]="styles">
       <app-show-map-slider
         *ngIf="mOn"
         [val]="object.temperature + modifier"

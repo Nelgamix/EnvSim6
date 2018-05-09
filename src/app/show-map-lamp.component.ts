@@ -5,13 +5,7 @@ import {ShowMapObjectModifiable} from './show-map-object-modifiable';
 @Component({
   selector: 'app-show-map-lamp',
   template: `
-    <div style="width: 96px" class="no-select" [style.background-color]="background">
-      <app-show-map-slider
-        *ngIf="mOn"
-        [val]="100 * (object.intensity + modifier / 100)"
-        [format]="'Intensity: %d%'"
-        [width]="96">
-      </app-show-map-slider>
+    <div style="width: 96px" [ngStyle]="styles">
       <div style="width: 36px; display: inline-block">
         <i class="material-icons md-36" style="display: inline" [style.color]="object.color">lightbulb_outline</i>
       </div>

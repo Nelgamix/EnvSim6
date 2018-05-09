@@ -18,10 +18,15 @@ export class Utils {
     return '#' + Utils.dec2hex(red) + Utils.dec2hex(green) + Utils.dec2hex(blue);
   }
 
-  static randomColor(): string {
+  static randomColor(min: number = 0, max: number = 256): string {
+    if (min >= max) {
+      console.error('randomColor: min can\'t be superior to max.');
+      return '#000';
+    }
+
     return 'rgb(' +
-      Math.floor(64 + Math.random() * 192) + ', ' +
-      Math.floor(64 + Math.random() * 192) + ', ' +
-      Math.floor(64 + Math.random() * 192) + ')';
+      Math.floor(min + Math.random() * (Math.min(256, max) - min)) + ', ' +
+      Math.floor(min + Math.random() * (Math.min(256, max) - min)) + ', ' +
+      Math.floor(min + Math.random() * (Math.min(256, max) - min)) + ')';
   }
 }
