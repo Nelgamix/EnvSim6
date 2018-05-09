@@ -22,6 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ShowMapSliderComponent} from './show-map-slider.component';
 import {ShowMapThermometerComponent} from './show-map-thermometer.component';
 import {ConfigureThermometerComponent} from './configure-thermometer.component';
+import {DragDropModule} from 'alx-dragdrop';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import {ConfigureThermometerComponent} from './configure-thermometer.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    DragDropModule/*,
+    NgDragDropModule.forRoot()*/
   ],
   providers: [
     WorldsimService,

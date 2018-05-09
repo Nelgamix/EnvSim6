@@ -1,6 +1,7 @@
 import {Component, HostListener, Input} from '@angular/core';
 import {Location} from '../../projects/worldsim/src/lib/model/Location';
 import {Utils} from './utils';
+import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
 
 @Component({
   selector: 'app-show-map-location',
@@ -8,7 +9,7 @@ import {Utils} from './utils';
     .ws-location {
       position: absolute;
     }
-    .ws-location::after {
+    .ws-location::before {
       content: '';
       position: absolute;
       top: 0;
@@ -24,11 +25,17 @@ import {Utils} from './utils';
       transform: translate(-50%, -50%);
       font-size: 130%;
     }
+    .can-drop {
+      z-index: 10;
+    }
   `],
   template: `
     <div
       class="ws-location"
+      alx-dropzone
+      (alx-ondrop)="dropped($event)"
       [style.background-color]="color"
+      alx-drag-over-css="can-drop"
       [style.top]="(location.position.y * magnificationY) + 'px'"
       [style.left]="(location.position.x * magnificationX) + 'px'"
       [style.width]="(location.width * magnificationX) + 'px'"
@@ -41,9 +48,12 @@ import {Utils} from './utils';
       </app-show-map-location>
       <span *ngIf="location.sublocations.length === 0" class="ws-location-name">
         <b>{{location.name}}</b>
-        <span *ngFor="let p of location.personnages">
+        <span *ngFor="let a of location.avatars"
+              style="cursor: pointer"
+              [alx-draggable]="a"
+              (alx-drag-end)="endDragged($event)">
           <br>
-          <i class="material-icons">person_pin</i>{{p.name}}
+          <i class="material-icons">person_pin</i>{{a.name}}
         </span>
       </span>
     </div>
@@ -58,5 +68,15 @@ export class ShowMapLocationComponent {
 
   @HostListener('click') onClick() {
     console.log(this.location.name);
+  }
+
+  dropped(a: Avatar) {
+    console.log('Dropped ' + a.name + ' on ' + this.location.name);
+    this.location.addAvatar(a);
+  }
+
+  endDragged(a: Avatar) {
+    console.log('Removing ' + a.name + ' from ' + this.location.name);
+    this.location.removeAvatar(a);
   }
 }

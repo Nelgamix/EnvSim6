@@ -7,7 +7,7 @@ export class Location {
   private _height: number;
   private _metadata: any;
   private _position: Position;
-  private _personnages: Avatar[];
+  private _avatars: Avatar[];
   private _sublocations: Location[];
 
   constructor(
@@ -24,7 +24,7 @@ export class Location {
     this._height = height;
     this._metadata = metadata;
     this._position = position;
-    this._personnages = personnages;
+    this._avatars = personnages;
     this._sublocations = sublocations;
   }
 
@@ -48,19 +48,28 @@ export class Location {
     return this._position;
   }
 
-  get personnages(): Avatar[] {
-    return this._personnages;
+  get avatars(): Avatar[] {
+    return this._avatars;
   }
 
   get sublocations(): Location[] {
     return this._sublocations;
   }
 
-  addPersonnage(p: Avatar) {
-    this._personnages.push(p);
+  addAvatar(p: Avatar) {
+    this._avatars.push(p);
   }
 
   addSublocation(sl: Location) {
     this._sublocations.push(sl);
+  }
+
+  removeAvatar(a: Avatar) {
+    const io = this._avatars.indexOf(a);
+    if (io < 0) {
+      console.error('Avatar does not exists on this location.');
+      return;
+    }
+    this._avatars.splice(io, 1);
   }
 }

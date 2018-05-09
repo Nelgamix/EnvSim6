@@ -69,8 +69,8 @@ export class WorldsimService {
     const ps: Avatar[] = [];
     const ls: Location[] = [];
 
-    if (sl.personnages) {
-      for (const p of sl.personnages) {
+    if (sl.avatars) {
+      for (const p of sl.avatars) {
         ps.push(new Avatar(p.name, (p.metadata ? p.metadata : undefined)));
       }
     }

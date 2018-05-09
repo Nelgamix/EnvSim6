@@ -18,8 +18,8 @@ import {Location} from '../../projects/worldsim/src/lib/model/Location';
   ],
   template: `
     <b>{{ location.name }}</b> &rArr;
-    <span class="red">{{ location.width }}x{{ location.height }}</span>
-    at <span class="green">({{ location.position.x + ', ' + location.position.y }})</span>
+    <span class="red">{{location.width}}x{{location.height}}</span>
+    at <span class="green">({{location.position.x + ', ' + location.position.y}})</span>
     <ul *ngIf="location.sublocations.length > 0">
       <li *ngFor="let l of location.sublocations">
         <app-show-location [location]="l"></app-show-location>
@@ -37,8 +37,8 @@ export class ShowLocationComponent {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  readonly magnificationX: number = 3;
-  readonly magnificationY: number = 2;
+  readonly magnificationX: number = 2.6;
+  readonly magnificationY: number = 1.8;
 
   configure: Obj;
 
@@ -113,7 +113,7 @@ export class AppComponent {
             x: 80,
             y: 0
           },
-          'personnages': [{name: 'Lucas'}]
+          'avatars': [{name: 'Alice'}]
         },
         {
           'name': 'Salon',
@@ -176,7 +176,8 @@ export class AppComponent {
               'position': {
                 x: 0,
                 y: 0
-              }
+              },
+              'avatars': [{name: 'Bob'}]
             },
             {
               'name': 'Chambre 2',
