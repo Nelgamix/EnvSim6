@@ -1,7 +1,7 @@
-import {Emitter} from '../Emitter';
 import {Position} from '../Position';
+import {Obj} from '../Obj';
 
-export class Thermometer extends Emitter {
+export class Thermometer extends Obj {
   public static readonly TEMPERATURE_MIN = 10;
   public static readonly TEMPERATURE_MAX = 30;
 
@@ -29,7 +29,9 @@ export class Thermometer extends Emitter {
   }
 
   modifyTemperature(modifier: number): void {
-    if (modifier === 0) return;
+    if (modifier === 0) {
+      return;
+    }
     this.temperature += modifier;
   }
 }

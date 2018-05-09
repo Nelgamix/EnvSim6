@@ -1,18 +1,15 @@
 import {Location} from './Location';
-import {Emitter} from './Emitter';
-import {Receiver} from './Receiver';
+import {Obj} from './Obj';
 
 export class World {
   private readonly _locations: Location[];
-  private readonly _emitters: Emitter[];
-  private readonly _receivers: Receiver[];
+  private readonly _objects: Obj[];
 
   private readonly _observers: ((any) => void)[];
 
   constructor() {
     this._locations = [];
-    this._emitters = [];
-    this._receivers = [];
+    this._objects = [];
     this._observers = [];
   }
 
@@ -20,13 +17,9 @@ export class World {
     this._locations.push(location);
   }
 
-  public addEmmiter(emitter: Emitter) {
-    this._emitters.push(emitter);
-    emitter.onChanged = (e: Emitter) => this.emitterChanged(e);
-  }
-
-  public addReceiver(receiver: Receiver) {
-    this._receivers.push(receiver);
+  public addObject(object: Obj) {
+    this._objects.push(object);
+    object.onChanged = (o: Obj) => this.objectChanged(o);
   }
 
   public addObserver(f: (any: any) => void): void {
@@ -37,12 +30,8 @@ export class World {
     return this._locations;
   }
 
-  get emitters(): Emitter[] {
-    return this._emitters;
-  }
-
-  get receivers(): Receiver[] {
-    return this._receivers;
+  get objects(): Obj[] {
+    return this._objects;
   }
 
   calculateHeight(): number {
@@ -67,9 +56,9 @@ export class World {
     return w;
   }
 
-  emitterChanged(e: Emitter): void {
+  objectChanged(o: Obj): void {
     for (const f of this._observers) {
-      f(e);
+      f(o);
     }
   }
 }

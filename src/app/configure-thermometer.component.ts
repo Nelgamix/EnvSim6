@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Thermometer} from '../../projects/worldsim/src/lib/model/emitters/Thermometer';
+import {Thermometer} from '../../projects/worldsim/src/lib/model/objects/Thermometer';
 
 @Component({
   selector: 'app-configure-thermometer',

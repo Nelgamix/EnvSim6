@@ -1,7 +1,7 @@
-import {Emitter} from '../Emitter';
 import {Position} from '../Position';
+import {Obj} from '../Obj';
 
-export class LightSensor extends Emitter {
+export class LightSensor extends Obj {
   public static readonly LIGHT_MIN = 0;
   public static readonly LIGHT_MAX = 1;
 
@@ -29,7 +29,9 @@ export class LightSensor extends Emitter {
   }
 
   modifyLight(modifier: number): void {
-    if (modifier === 0) return;
+    if (modifier === 0) {
+      return;
+    }
     this.light += modifier;
   }
 }

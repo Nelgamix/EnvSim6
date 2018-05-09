@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {ShowMapEmitter} from './show-map-emitter';
-import {Thermometer} from '../../projects/worldsim/src/lib/model/emitters/Thermometer';
+import {ShowMapObjectModifiable} from './show-map-object-modifiable';
+import {Thermometer} from '../../projects/worldsim/src/lib/model/objects/Thermometer';
 import {Utils} from './utils';
 
 @Component({
@@ -9,7 +9,7 @@ import {Utils} from './utils';
     <div style="width: 96px" class="no-select" [style.background-color]="background">
       <app-show-map-slider
         *ngIf="mOn"
-        [val]="emitter.temperature + modifier"
+        [val]="object.temperature + modifier"
         [min]="Thermometer.TEMPERATURE_MIN"
         [max]="Thermometer.TEMPERATURE_MAX"
         [format]="'Temp.: %d°C'"
@@ -19,13 +19,13 @@ import {Utils} from './utils';
         <i class="material-icons md-36" style="display: inline" [style.color]="iconColor">whatshot</i>
       </div>
       <div style="display: inline-block">
-        <span>{{emitter.temperature}}°C</span>
+        <span>{{object.temperature}}°C</span>
       </div>
     </div>
   `
 })
-export class ShowMapThermometerComponent extends ShowMapEmitter implements OnChanges {
-  @Input() emitter: Thermometer;
+export class ShowMapThermometerComponent extends ShowMapObjectModifiable implements OnChanges {
+  @Input() object: Thermometer;
   Thermometer = Thermometer;
   iconColor: string;
 
@@ -36,13 +36,13 @@ export class ShowMapThermometerComponent extends ShowMapEmitter implements OnCha
   calculateIconColor() {
     const cold = '0000ff';
     const hot = 'ff0000';
-    const ratio = (this.emitter.temperature - Thermometer.TEMPERATURE_MIN) /
+    const ratio = (this.object.temperature - Thermometer.TEMPERATURE_MIN) /
         (Thermometer.TEMPERATURE_MAX - Thermometer.TEMPERATURE_MIN);
 
     return Utils.scaleColor(ratio, cold, hot);
   }
 
   protected modify(modifier: number) {
-    this.emitter.modifyTemperature(modifier);
+    this.object.modifyTemperature(modifier);
   }
 }

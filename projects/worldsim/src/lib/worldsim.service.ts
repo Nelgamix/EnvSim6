@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {World} from './model/World';
-import {Lamp} from './model/receiver/Lamp';
+import {Lamp} from './model/objects/Lamp';
 import {Position} from './model/Position';
 import {Avatar} from './model/Avatar';
 import {Location} from './model/Location';
-import {Speakers} from './model/receiver/Speakers';
-import {TV} from './model/receiver/TV';
-import {Emitter} from './model/Emitter';
-import {Thermometer} from './model/emitters/Thermometer';
-import {LightSensor} from './model/emitters/LightSensor';
+import {Speakers} from './model/objects/Speakers';
+import {TV} from './model/objects/TV';
+import {Thermometer} from './model/objects/Thermometer';
+import {LightSensor} from './model/objects/LightSensor';
+import {Obj} from './model/Obj';
 
 @Injectable(/*{
   providedIn: WorldsimModule
@@ -26,20 +26,20 @@ export class WorldsimService {
         switch (o.type) {
           // Receivers
           case 'Lamp':
-            this._world.addReceiver(new Lamp(o.name, new Position(o.position.x, o.position.y), o.color, o.intensity));
+            this._world.addObject(new Lamp(o.name, new Position(o.position.x, o.position.y), o.color, o.intensity));
             break;
           case 'Speakers':
-            this._world.addReceiver(new Speakers(o.name, new Position(o.position.x, o.position.y), o.volume));
+            this._world.addObject(new Speakers(o.name, new Position(o.position.x, o.position.y), o.volume));
             break;
           case 'TV':
-            this._world.addReceiver(new TV(o.name, new Position(o.position.x, o.position.y), o.channel, o.volume));
+            this._world.addObject(new TV(o.name, new Position(o.position.x, o.position.y), o.channel, o.volume));
             break;
           // Emitters
           case 'Thermometer':
-            this._world.addEmmiter(new Thermometer(o.name, new Position(o.position.x, o.position.y), o.temperature));
+            this._world.addObject(new Thermometer(o.name, new Position(o.position.x, o.position.y), o.temperature));
             break;
           case 'LightSensor':
-            this._world.addEmmiter(new LightSensor(o.name, new Position(o.position.x, o.position.y), o.light));
+            this._world.addObject(new LightSensor(o.name, new Position(o.position.x, o.position.y), o.light));
             break;
         }
       }
@@ -56,8 +56,8 @@ export class WorldsimService {
 
   public modelChanged(e: any): void {
     // Contact and send data to server about the object.
-    if (e instanceof Emitter) {
-      console.log('Emitter changed.');
+    if (e instanceof Obj) {
+      console.log('Object changed.');
     }
   }
 

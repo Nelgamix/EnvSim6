@@ -9,8 +9,7 @@ import {
 import {WorldsimService} from '../../projects/worldsim/src/lib/worldsim.service';
 import {ShowMapComponent} from './show-map.component';
 import {ShowMapLocationComponent} from './show-map-location.component';
-import {ShowMapReceiverComponent} from './show-map-receiver.component';
-import {ShowMapEmitterComponent} from './show-map-emitter.component';
+import {ShowMapObjectComponent} from './show-map-object.component';
 import {ShowMapLampComponent} from './show-map-lamp.component';
 import {ConfigureComponent} from './configure.component';
 import {ConfigureLampComponent} from './configure-lamp.component';
@@ -30,8 +29,7 @@ import {DragDropModule} from 'alx-dragdrop';
     ShowLocationComponent,
     ShowMapComponent,
     ShowMapLocationComponent,
-    ShowMapReceiverComponent,
-    ShowMapEmitterComponent,
+    ShowMapObjectComponent,
     ShowMapLampComponent,
     ShowMapTvComponent,
     ShowMapThermometerComponent,
@@ -45,8 +43,7 @@ import {DragDropModule} from 'alx-dragdrop';
     BrowserAnimationsModule,
     FormsModule,
     MatInputModule,
-    DragDropModule/*,
-    NgDragDropModule.forRoot()*/
+    DragDropModule
   ],
   providers: [
     WorldsimService,

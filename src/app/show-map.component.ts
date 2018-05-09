@@ -20,20 +20,13 @@ import {World} from '../../projects/worldsim/src/lib/model/World';
         [magnificationX]="magnificationX"
         [magnificationY]="magnificationY">
       </app-show-map-location>
-      <app-show-map-emitter
-        *ngFor="let e of world.emitters"
-        [emitter]="e"
+      <app-show-map-object
+        *ngFor="let o of world.objects"
+        [object]="o"
         [magnificationX]="magnificationX"
         [magnificationY]="magnificationY"
         [onConfigure]="onConfigure">
-      </app-show-map-emitter>
-      <app-show-map-receiver
-        *ngFor="let r of world.receivers"
-        [receiver]="r"
-        [magnificationX]="magnificationX"
-        [magnificationY]="magnificationY"
-        [onConfigure]="onConfigure">
-      </app-show-map-receiver>
+      </app-show-map-object>
     </div>
   `
 })

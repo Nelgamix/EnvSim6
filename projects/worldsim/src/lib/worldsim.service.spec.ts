@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { WorldsimService } from './worldsim.service';
-import {Lamp} from './model/receiver/Lamp';
+import {Lamp} from './model/objects/Lamp';
 import {Position} from './model/Position';
 
 describe('WorldsimService', () => {
@@ -62,8 +62,7 @@ describe('WorldsimService', () => {
 
     service.loadEnvironment(obj);
 
-    expect(service.world.receivers.length).toEqual(2);
-    expect(service.world.emitters.length).toEqual(0);
+    expect(service.world.objects.length).toEqual(2);
     expect(service.world.locations.length).toEqual(2);
   }));
 
@@ -136,18 +135,18 @@ describe('WorldsimService', () => {
       ]
     });
 
-    expect(service.world.receivers.length).toEqual(2);
+    expect(service.world.objects.length).toEqual(2);
 
     // Test object 1
-    expect(service.world.receivers[0].name).toEqual('Samsung Truc #1');
-    expect(service.world.receivers[0].position).toEqual(new Position(0, 0));
-    expect((<Lamp> service.world.receivers[0]).color).toEqual('#84ff81');
-    expect((<Lamp> service.world.receivers[0]).intensity).toEqual(1);
+    expect(service.world.objects[0].name).toEqual('Samsung Truc #1');
+    expect(service.world.objects[0].position).toEqual(new Position(0, 0));
+    expect((<Lamp> service.world.objects[0]).color).toEqual('#84ff81');
+    expect((<Lamp> service.world.objects[0]).intensity).toEqual(1);
 
     // Test object 2
-    expect(service.world.receivers[1].name).toEqual('Philips LMP1');
-    expect(service.world.receivers[1].position).toEqual(new Position(10, 120));
-    expect((<Lamp> service.world.receivers[1]).color).toEqual('#fff');
-    expect((<Lamp> service.world.receivers[1]).intensity).toEqual(0.2);
+    expect(service.world.objects[1].name).toEqual('Philips LMP1');
+    expect(service.world.objects[1].position).toEqual(new Position(10, 120));
+    expect((<Lamp> service.world.objects[1]).color).toEqual('#fff');
+    expect((<Lamp> service.world.objects[1]).intensity).toEqual(0.2);
   }));
 });

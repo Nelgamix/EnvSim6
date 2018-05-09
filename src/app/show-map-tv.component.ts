@@ -1,5 +1,6 @@
-import {Component, HostListener, Input} from '@angular/core';
-import {TV} from '../../projects/worldsim/src/lib/model/receiver/TV';
+import {Component, Input} from '@angular/core';
+import {TV} from '../../projects/worldsim/src/lib/model/objects/TV';
+import {ShowMapObjectModifiable} from './show-map-object-modifiable';
 
 @Component({
   selector: 'app-show-map-tv',
@@ -9,55 +10,12 @@ import {TV} from '../../projects/worldsim/src/lib/model/receiver/TV';
         <i class="material-icons md-36" style="display: inline">tv</i>
       </div>
       <div style="display: inline-block">
-        <span>{{tv.channel}}</span> <br>
-        <span>{{tv.volume * 100 | number:'1.0-2'}}%</span>
+        <span>{{object.channel}}</span> <br>
+        <span>{{object.volume * 100 | number:'1.0-2'}}%</span>
       </div>
     </div>
   `
 })
-export class ShowMapTvComponent {
-  @Input() tv: TV;
-  @Input() onConfigure: (Obj) => void;
-
-  mDown = false;
-  last: MouseEvent;
-  modIntensity: number;
-  background = 'none';
-
-  @HostListener('mouseenter') onMouseEnter() {
-    this.background = '#aaa8';
-  }
-
-  @HostListener('mouseleave') onMouseLeave() {
-    this.background = '#fff0';
-    this.mDown = false;
-    this.saveIntensity();
-  }
-
-  @HostListener('mousedown', ['$event']) onMouseDown(event: MouseEvent) {
-    this.mDown = true;
-    this.last = event;
-  }
-
-  @HostListener('mousemove', ['$event']) onMouseMove(event: MouseEvent) {
-    if (this.mDown) {
-      this.modIntensity = event.clientX - this.last.clientX;
-    }
-  }
-
-  @HostListener('mouseup') onMouseUp() {
-    this.mDown = false;
-    this.saveIntensity();
-  }
-
-  @HostListener('click') onClick() {
-    this.onConfigure(this.tv);
-  }
-
-  private saveIntensity(): void {
-    if (this.modIntensity) {
-      this.tv.modifyVolume(this.modIntensity / 100);
-      this.modIntensity = 0;
-    }
-  }
+export class ShowMapTvComponent extends ShowMapObjectModifiable {
+  @Input() object: TV;
 }

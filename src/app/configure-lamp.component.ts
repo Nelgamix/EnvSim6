@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Lamp} from '../../projects/worldsim/src/lib/model/receiver/Lamp';
+import {Lamp} from '../../projects/worldsim/src/lib/model/objects/Lamp';
 
 @Component({
   selector: 'app-configure-lamp',

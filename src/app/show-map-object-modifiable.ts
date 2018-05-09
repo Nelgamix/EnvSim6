@@ -1,8 +1,8 @@
 import {HostListener, Input} from '@angular/core';
-import {Emitter} from '../../projects/worldsim/src/lib/model/Emitter';
+import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
 
-export class ShowMapEmitter {
-  @Input() emitter: Emitter;
+export class ShowMapObjectModifiable {
+  @Input() object: Obj;
   @Input() onConfigure: (Obj) => void;
 
   protected mDown = false;
@@ -50,7 +50,7 @@ export class ShowMapEmitter {
   }
 
   @HostListener('click') onClick() {
-    this.onConfigure(this.emitter);
+    this.onConfigure(this.object);
     this.mouseClick();
   }
 

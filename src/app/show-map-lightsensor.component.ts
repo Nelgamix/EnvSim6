@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {ShowMapEmitter} from './show-map-emitter';
-import {LightSensor} from '../../projects/worldsim/src/lib/model/emitters/LightSensor';
+import {ShowMapObjectModifiable} from './show-map-object-modifiable';
+import {LightSensor} from '../../projects/worldsim/src/lib/model/objects/LightSensor';
 import {Utils} from './utils';
 
 @Component({
@@ -24,8 +24,8 @@ import {Utils} from './utils';
     </div>
   `
 })
-export class ShowMapLightSensorComponent extends ShowMapEmitter implements OnChanges {
-  @Input() emitter: LightSensor;
+export class ShowMapLightSensorComponent extends ShowMapObjectModifiable implements OnChanges {
+  @Input() object: LightSensor;
 
   LightSensor = LightSensor;
 
@@ -39,13 +39,13 @@ export class ShowMapLightSensorComponent extends ShowMapEmitter implements OnCha
     const dark = '000000';
     const bright = 'ffffff';
 
-    const ratio = (this.emitter.light - LightSensor.LIGHT_MIN) /
+    const ratio = (this.object.light - LightSensor.LIGHT_MIN) /
       (LightSensor.LIGHT_MAX - LightSensor.LIGHT_MIN);
 
     return Utils.scaleColor(ratio, dark, bright);
   }
 
   protected modify(modifier: number) {
-    this.emitter.modifyLight(modifier);
+    this.object.modifyLight(modifier);
   }
 }

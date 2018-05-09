@@ -1,7 +1,7 @@
 import {Position} from '../Position';
-import {Receiver} from '../Receiver';
+import {Obj} from '../Obj';
 
-export class Lamp extends Receiver {
+export class Lamp extends Obj {
   public static readonly INTENSITY_MIN = 0;
   public static readonly INTENSITY_MAX = 1;
 

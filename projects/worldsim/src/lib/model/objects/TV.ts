@@ -1,7 +1,7 @@
-import {Receiver} from '../Receiver';
 import {Position} from '../Position';
+import {Obj} from '../Obj';
 
-export class TV extends Receiver {
+export class TV extends Obj {
   public static readonly VOLUME_MIN = 0;
   public static readonly VOLUME_MAX = 1;
 

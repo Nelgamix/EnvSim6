@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {WorldsimService} from '../../projects/worldsim/src/lib/worldsim.service';
-import {Lamp} from '../../projects/worldsim/src/lib/model/receiver/Lamp';
+import {Lamp} from '../../projects/worldsim/src/lib/model/objects/Lamp';
 import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
 import {Location} from '../../projects/worldsim/src/lib/model/Location';
 
