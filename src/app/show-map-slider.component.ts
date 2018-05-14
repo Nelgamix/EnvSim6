@@ -3,9 +3,18 @@ import {DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-show-map-slider',
+  styles: [`
+    #div {
+      width: 100%;
+      height: 100%;
+    }
+    #span {
+      font-weight: bold;
+    }
+  `],
   template: `
-    <div style="text-align: center; position: absolute; top: -20px; left: 0; right: 0; font-size: 80%" [style.width]="width + 'px'">
-      {{sf}}
+    <div id="div" [style.width]="width + 'px'">
+      <span id="span">{{sf}}</span>
     </div>
   `
 })

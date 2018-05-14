@@ -1,21 +1,30 @@
 import {Component, Input} from '@angular/core';
 import {TV} from '../../projects/worldsim/src/lib/model/objects/TV';
-import {ShowMapObjectModifiable} from './show-map-object-modifiable';
+import {DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-show-map-tv',
   template: `
-    <div style="width: 96px" [ngStyle]="styles">
-      <div style="width: 36px; display: inline-block">
-        <i class="material-icons md-36" style="display: inline">tv</i>
+    <app-show-map-object-template
+        [object]="object"
+        [props]="props"
+        [onConfigure]="onConfigure"
+        [modifiable]="false"
+        displayName="TV">
+      <div>
+        <i class="material-icons md-36">tv</i>
       </div>
-      <div style="display: inline-block">
-        <span>{{object.channel}}</span> <br>
-        <span>{{object.volume * 100 | number:'1.0-2'}}%</span>
-      </div>
-    </div>
+    </app-show-map-object-template>
   `
 })
-export class ShowMapTvComponent extends ShowMapObjectModifiable {
+export class ShowMapTvComponent {
   @Input() object: TV;
+  @Input() onConfigure: (Obj) => void;
+
+  constructor(private decimalPipe: DecimalPipe) {}
+
+  props = [
+    () => this.object.channel,
+    () => this.decimalPipe.transform(this.object.volume * 100, '1.0-2') + '%'
+  ];
 }

@@ -22,6 +22,8 @@ import {ShowMapSliderComponent} from './show-map-slider.component';
 import {ShowMapThermometerComponent} from './show-map-thermometer.component';
 import {ConfigureThermometerComponent} from './configure-thermometer.component';
 import {DragDropModule} from 'alx-dragdrop';
+import {ShowMapLampIconComponent} from './show-map-lamp-icon.component';
+import {ShowMapObjectTemplateComponent} from './show-map-object-template.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {DragDropModule} from 'alx-dragdrop';
     ShowMapComponent,
     ShowMapLocationComponent,
     ShowMapObjectComponent,
+    ShowMapObjectTemplateComponent,
     ShowMapLampComponent,
+    ShowMapLampIconComponent,
     ShowMapTvComponent,
     ShowMapThermometerComponent,
     ShowMapSliderComponent,

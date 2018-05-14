@@ -1,22 +1,30 @@
 import {Component, Input} from '@angular/core';
 import {Lamp} from '../../projects/worldsim/src/lib/model/objects/Lamp';
-import {ShowMapObjectModifiable} from './show-map-object-modifiable';
+import {DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-show-map-lamp',
   template: `
-    <div style="width: 96px" [ngStyle]="styles">
-      <div style="width: 36px; display: inline-block">
-        <i class="material-icons md-36" style="display: inline" [style.color]="object.color">lightbulb_outline</i>
-      </div>
-      <div style="display: inline-block">
-        <span>{{object.color}}</span> <br>
-        <span>{{object.intensity * 100 | number:'1.0-2'}}%</span>
-      </div>
-    </div>
+    <app-show-map-object-template
+        [object]="object"
+        [props]="props"
+        [onConfigure]="onConfigure"
+        [modifiable]="false"
+        displayName="Lamp">
+      <app-show-map-lamp-icon [object]="object" [dimens]="36"></app-show-map-lamp-icon>
+    </app-show-map-object-template>
   `
 })
-export class ShowMapLampComponent extends ShowMapObjectModifiable {
+export class ShowMapLampComponent {
   @Input() object: Lamp;
   @Input() onConfigure: (Obj) => void;
+
+  constructor(private decimalPipe: DecimalPipe) {}
+
+  props = [
+    // Intensity
+    () => this.decimalPipe.transform(this.object.intensity * 100, '1.0-2') + '%',
+    // Color
+    () => this.object.color
+  ];
 }

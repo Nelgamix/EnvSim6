@@ -13,3 +13,9 @@
   justify-content: center;
   margin-bottom: 50px;
 }
+
+#title {
+  text-align: center;
+  background-color: #828282;
+  color: white;
+}

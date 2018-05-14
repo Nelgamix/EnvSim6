@@ -39,6 +39,7 @@ import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
     }
     .ws-avatar {
       cursor: pointer;
+      text-align: center;
     }
     .ws-avatar:hover {
       color: red;
@@ -62,14 +63,11 @@ import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
         [magnificationX]="magnificationX">
       </app-show-map-location>
       <span *ngIf="location.sublocations.length === 0" class="ws-location-name">
-        <b>{{location.name}}</b>
-        <span *ngFor="let a of location.avatars"
-              class="ws-avatar"
-              [alx-draggable]="a"
-              (alx-drag-end)="endDragged($event)">
-          <br>
-          <i class="material-icons">person_pin</i>{{a.name}}
-        </span>
+        <div style="font-weight: bold">{{location.name}}</div>
+        <div class="ws-avatar" *ngFor="let a of location.avatars" [alx-draggable]="{location: location, avatar: a}">
+          <i class="material-icons">person_pin</i>
+          <span style="vertical-align: top">{{a.name}}</span>
+        </div>
       </span>
     </div>
   `
@@ -85,13 +83,11 @@ export class ShowMapLocationComponent {
     console.log(this.location.name);
   }
 
-  dropped(a: Avatar) {
-    console.log('Dropped ' + a.name + ' on ' + this.location.name);
-    this.location.addAvatar(a);
-  }
+  dropped(e: {location: Location, avatar: Avatar}) {
+    if (this.location === e.location) return;
 
-  endDragged(a: Avatar) {
-    console.log('Removing ' + a.name + ' from ' + this.location.name);
-    this.location.removeAvatar(a);
+    console.log('Dropped ' + e.avatar.name + ' from ' + e.location.name);
+    this.location.addAvatar(e.avatar);
+    e.location.removeAvatar(e.avatar);
   }
 }
