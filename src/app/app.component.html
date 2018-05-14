@@ -1,37 +1,50 @@
-<h1 id="title">Env Sim</h1>
+<div id="container">
+  <h1 id="title">
+    Environment Simulator
+  </h1>
 
-<p>Env Sim: Environment simulator for my M1 Info. It simulates the environment. To use with CCBL server.</p>
+  <h3 id="intro">
+    Env Sim: Environment simulator for my M1 Info. It simulates the environment. To use with CCBL server.
+  </h3>
 
-<div id="es-listing">
-  <div>
-    <h2>List of objects<span style="display: block; font-size: 60%">Objects can <i>send or receive</i> data to or from the server</span></h2>
-    <ul>
-      <li *ngFor="let o of worldsimService.world.objects">
-        <b>{{ o.name }}</b> at ({{ o.position.x }}, {{ o.position.y }})
-      </li>
-    </ul>
+  <div id="content">
+    <div id="es-listing">
+      <div>
+        <h2>List of objects<span style="display: block; font-size: 60%">Objects can <i>send or receive</i> data to or from the server</span></h2>
+        <ul>
+          <li *ngFor="let o of worldsimService.world.objects">
+            <b>{{ o.name }}</b> at ({{ o.position.x }}, {{ o.position.y }})
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>List of locations</h2>
+        <ul>
+          <li *ngFor="let l of worldsimService.world.locations">
+            <app-show-location [location]="l"></app-show-location>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="es-map-container">
+      <div id="es-map-wrapper">
+        <h2>Location Map (Beta)</h2>
+
+        <div id="es-map-display">
+          <app-show-map
+            [onConfigure]="onConfigureBinded"
+            [world]="worldsimService.world"
+            [magnificationX]="magnificationX"
+            [magnificationY]="magnificationY">
+          </app-show-map>
+
+          <app-configure
+            [obj]="configure">
+          </app-configure>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <h2>List of locations</h2>
-    <ul>
-      <li *ngFor="let l of worldsimService.world.locations">
-        <app-show-location [location]="l"></app-show-location>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<h2>Location Map (Beta)</h2>
-<div id="es-map">
-  <app-show-map
-    [onConfigure]="onConfigureBinded"
-    [world]="worldsimService.world"
-    [magnificationX]="magnificationX"
-    [magnificationY]="magnificationY">
-  </app-show-map>
-
-  <app-configure
-    [obj]="configure">
-  </app-configure>
 </div>
