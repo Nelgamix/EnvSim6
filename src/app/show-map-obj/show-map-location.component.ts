@@ -69,7 +69,7 @@ import {Avatar} from '../../../projects/worldsim/src/lib/model/Avatar';
           [magnificationY]="magnificationY"
           [magnificationX]="magnificationX">
       </app-show-map-location>
-      <div id="display">
+      <div id="display" *ngIf="location.sublocations.length === 0">
         <div class="ws-location-name">
           <div style="font-weight: bold">{{location.name}}</div>
           <div class="ws-avatar" *ngFor="let a of location.avatars" [alx-draggable]="{location: location, avatar: a}">

@@ -40,3 +40,20 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 * [Material Icons](https://material.io/icons/)
 * [Material Components](https://material.angular.io/components/categories)
+
+Socket -> envoyer
+initialDescription: {
+  channel[], event[], emitter[]
+  forme emitter/channel: type, id, value
+  forme event: id, type
+}
+
+messages (envoi):
+* updateChannel: {id: string, value: any} // plus tard
+* updateEmitter: {id: string, value: any}
+* triggerEvent: {id: string, value: any}
+
+message (reception):
+* updateChannel: {id: string, value: any} // plus tard
+
+
