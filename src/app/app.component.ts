@@ -6,20 +6,11 @@ import {Location} from '../../projects/worldsim/src/lib/model/Location';
 
 @Component({
   selector: 'app-show-location',
-  styles: [
-    `
-      .red {
-        color: red;
-      }
-      .green {
-        color: limegreen;
-      }
-    `
-  ],
+  styles: [],
   template: `
     <b>{{ location.name }}</b> &rArr;
-    <span class="red">{{location.width}}x{{location.height}}</span>
-    at <span class="green">({{location.position.x + ', ' + location.position.y}})</span>
+    <span class="dimensions">{{location.width}}x{{location.height}}</span>
+    at <span class="location">({{location.position.x + ', ' + location.position.y}})</span>
     <ul *ngIf="location.sublocations.length > 0">
       <li *ngFor="let l of location.sublocations">
         <app-show-location [location]="l"></app-show-location>

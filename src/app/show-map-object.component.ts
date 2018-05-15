@@ -9,8 +9,6 @@ import {TV} from '../../projects/worldsim/src/lib/model/objects/TV';
   template: `
     <div [style.top]="(object.position.y * magnificationY) + 'px'"
          [style.left]="(object.position.x * magnificationX) + 'px'"
-         [style.width]="24 + 'px'"
-         [style.height]="24 + 'px'"
          style="position: absolute;">
       <app-show-map-thermometer
         *ngIf="Thermometer.isInstance(object)"

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TV} from '../../projects/worldsim/src/lib/model/objects/TV';
+import {TV} from '../../../projects/worldsim/src/lib/model/objects/TV';
 import {DecimalPipe} from '@angular/common';
 
 @Component({

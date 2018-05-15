@@ -22,24 +22,35 @@ import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
       font-size: 13px;
       background-color: aquamarine;
     }
+    #container {
+      min-width: 88px;
+      display: flex;
+      position: relative;
+      padding: 4px;
+    }
+    #icon {
+      width: 36px;
+      height: 36px;
+      margin-right: 4px;
+    }
   `],
   template: `
-    <div style="width: 96px; display: flex; position: relative" [ngStyle]="styles">
+    <div id="container" [ngStyle]="styles">
       <div id="display-top">
         <app-show-map-slider
-          *ngIf="mOn && modifiable"
-          [val]="modificationValue + modifier"
-          [min]="modificationMin"
-          [max]="modificationMax"
-          [format]="modificationFormat"
-          [width]="96">
+            *ngIf="mOn && modifiable"
+            [val]="modificationValue + modifier"
+            [min]="modificationMin"
+            [max]="modificationMax"
+            [format]="modificationFormat"
+            [calculateColor]="calculateColor">
         </app-show-map-slider>
       </div>
-      <div style="margin: 4px">
+      <div id="icon">
         <ng-content></ng-content>
       </div>
       <div>
-        <div *ngFor="let p of props">{{p()}}</div>
+        <div *ngFor="let p of props" style="line-height: 18px">{{p()}}</div>
       </div>
       <div *ngIf="mOn && displayName != null"
            id="display-bottom">
@@ -51,8 +62,9 @@ import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
 export class ShowMapObjectTemplateComponent implements OnInit {
   @Input() object: Obj;
   @Input() props: (() => string)[];
-  @Input() onConfigure: (Obj) => void;
+  @Input() onConfigure: (o: Obj) => void;
   @Input() displayName: string;
+  @Input() calculateColor: (n: number) => string;
 
   @Input() modifiable: boolean;
   @Input() modification: (m: number) => void;

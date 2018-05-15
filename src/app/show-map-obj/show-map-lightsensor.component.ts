@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {LightSensor} from '../../projects/worldsim/src/lib/model/objects/LightSensor';
-import {Utils} from './utils';
+import {LightSensor} from '../../../projects/worldsim/src/lib/model/objects/LightSensor';
+import {Utils} from '../utils';
 
 @Component({
   selector: 'app-show-map-lightsensor',

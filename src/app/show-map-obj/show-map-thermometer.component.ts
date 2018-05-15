@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {Thermometer} from '../../projects/worldsim/src/lib/model/objects/Thermometer';
-import {Utils} from './utils';
+import {Thermometer} from '../../../projects/worldsim/src/lib/model/objects/Thermometer';
+import {Utils} from '../utils';
 
 @Component({
   selector: 'app-show-map-thermometer',
@@ -16,7 +16,8 @@ import {Utils} from './utils';
         [modificationFormat]="format"
         [modificationStrength]="3"
         [modification]="modify"
-        displayName="Thermometer">
+        displayName="Thermometer"
+        [calculateColor]="calculateColor">
       <div>
         <i class="material-icons md-36" [style.color]="iconColor">whatshot</i>
       </div>
@@ -35,17 +36,16 @@ export class ShowMapThermometerComponent implements OnChanges {
     () => this.object.temperature + '°C'
   ];
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.iconColor = this.calculateIconColor();
-  }
-
-  calculateIconColor() {
+  calculateColor = (n: number) => {
     const cold = '0000ff';
     const hot = 'ff0000';
-    const ratio = (this.object.temperature - Thermometer.TEMPERATURE_MIN) /
-        (Thermometer.TEMPERATURE_MAX - Thermometer.TEMPERATURE_MIN);
 
-    return Utils.scaleColor(ratio, cold, hot);
+    return Utils.scaleColor(n, cold, hot);
+  };
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const ratio = (this.object.temperature - Thermometer.TEMPERATURE_MIN) / (Thermometer.TEMPERATURE_MAX - Thermometer.TEMPERATURE_MIN);
+    this.iconColor = this.calculateColor(ratio);
   }
 
   protected modify(modifier: number) {

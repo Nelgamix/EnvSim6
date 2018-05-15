@@ -14,6 +14,14 @@ body {
   user-select: none; /* Chrome and Opera */
 }
 
+.location {
+  color: lightgreen;
+}
+.dimensions {
+  color: gold;
+}
+
+/* Material theme */
 /* Rules for sizing the icon. */
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }

@@ -1,7 +1,7 @@
 import {Component, HostListener, Input} from '@angular/core';
-import {Location} from '../../projects/worldsim/src/lib/model/Location';
-import {Utils} from './utils';
-import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
+import {Location} from '../../../projects/worldsim/src/lib/model/Location';
+import {Utils} from '../utils';
+import {Avatar} from '../../../projects/worldsim/src/lib/model/Avatar';
 
 @Component({
   selector: 'app-show-map-location',
@@ -18,12 +18,19 @@ import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
       left: 0;
       border: 2px solid black;
     }
+    #display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
     .ws-location-name {
-      position: absolute;
+      /*position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);*/
       font-size: 130%;
+      z-index: 1;
     }
     .can-drop {
     }
@@ -62,13 +69,15 @@ import {Avatar} from '../../projects/worldsim/src/lib/model/Avatar';
         [magnificationY]="magnificationY"
         [magnificationX]="magnificationX">
       </app-show-map-location>
-      <span *ngIf="location.sublocations.length === 0" class="ws-location-name">
-        <div style="font-weight: bold">{{location.name}}</div>
-        <div class="ws-avatar" *ngFor="let a of location.avatars" [alx-draggable]="{location: location, avatar: a}">
-          <i class="material-icons">person_pin</i>
-          <span style="vertical-align: top">{{a.name}}</span>
+      <div id="display">
+        <div *ngIf="location.sublocations.length === 0" class="ws-location-name">
+          <div style="font-weight: bold">{{location.name}}</div>
+          <div class="ws-avatar" *ngFor="let a of location.avatars" [alx-draggable]="{location: location, avatar: a}">
+            <i class="material-icons">person_pin</i>
+            <span style="vertical-align: top">{{a.name}}</span>
+          </div>
         </div>
-      </span>
+      </div>
     </div>
   `
 })
