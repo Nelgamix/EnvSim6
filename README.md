@@ -41,6 +41,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * [Material Icons](https://material.io/icons/)
 * [Material Components](https://material.angular.io/components/categories)
 
+* [Tacthab2](https://github.com/AlexDmr/tacthab2)
+
+connection socket -> NAME "simulator" (`const s = io("simulator")`)
+
 Socket -> envoyer
 initialDescription: {
   channel[], event[], emitter[]
@@ -54,6 +58,6 @@ messages (envoi):
 * triggerEvent: {id: string, value: any}
 
 message (reception):
-* updateChannel: {id: string, value: any} // plus tard
+* updateChannel: {id: string, value: any}
 
 
