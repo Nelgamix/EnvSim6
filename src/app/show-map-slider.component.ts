@@ -1,7 +1,6 @@
 import {Component, Input, OnChanges} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 
-/* TODO: change le bug */
 @Component({
   selector: 'app-show-map-slider',
   styles: [`
@@ -15,12 +14,22 @@ import {DecimalPipe} from '@angular/common';
       top: 0;
       bottom: 0;
       background-color: hsla(200, 50%, 60%, .6);
-      opacity: .33;
+      opacity: .66;
+    }
+    #overtext {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      text-align: center;
+      color: white;
     }
   `],
   template: `
+    R
     <div id="overlay" [style.width]="progress+'%'" [style.background-color]="progressColor"></div>
-    <span id="span">{{sf}}</span>
+    <div id="overtext">{{sf}}</div>
   `
 })
 export class ShowMapSliderComponent implements OnChanges {

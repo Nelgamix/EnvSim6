@@ -4,6 +4,7 @@ import {Obj} from './Obj';
 export class World {
   private readonly _locations: Location[];
   private readonly _objects: Obj[];
+  private _scale: {x: number, y: number};
 
   private readonly _observers: ((any) => void)[];
 
@@ -60,5 +61,13 @@ export class World {
     for (const f of this._observers) {
       f(o);
     }
+  }
+
+  set scale(scale: {x: number, y: number}) {
+    this._scale = scale;
+  }
+
+  get scale(): { x: number; y: number } {
+    return this._scale;
   }
 }

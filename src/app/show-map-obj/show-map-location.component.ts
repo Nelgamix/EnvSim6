@@ -54,23 +54,23 @@ import {Avatar} from '../../../projects/worldsim/src/lib/model/Avatar';
   `],
   template: `
     <div
-      class="ws-location"
-      alx-dropzone
-      (alx-ondrop)="dropped($event)"
-      [style.background-color]="color"
-      alx-drag-over-css="can-drop"
-      [style.top]="(location.position.y * magnificationY) + 'px'"
-      [style.left]="(location.position.x * magnificationX) + 'px'"
-      [style.width]="(location.width * magnificationX) + 'px'"
-      [style.height]="(location.height * magnificationY) + 'px'">
+        class="ws-location"
+        alx-dropzone
+        (alx-ondrop)="dropped($event)"
+        [style.background-color]="color"
+        alx-drag-over-css="can-drop"
+        [style.top]="(location.position.y * magnificationY) + 'px'"
+        [style.left]="(location.position.x * magnificationX) + 'px'"
+        [style.width]="(location.width * magnificationX) + 'px'"
+        [style.height]="(location.height * magnificationY) + 'px'">
       <app-show-map-location
-        *ngFor="let s of location.sublocations"
-        [location]="s"
-        [magnificationY]="magnificationY"
-        [magnificationX]="magnificationX">
+          *ngFor="let s of location.sublocations"
+          [location]="s"
+          [magnificationY]="magnificationY"
+          [magnificationX]="magnificationX">
       </app-show-map-location>
       <div id="display">
-        <div *ngIf="location.sublocations.length === 0" class="ws-location-name">
+        <div class="ws-location-name">
           <div style="font-weight: bold">{{location.name}}</div>
           <div class="ws-avatar" *ngFor="let a of location.avatars" [alx-draggable]="{location: location, avatar: a}">
             <i class="material-icons">person_pin</i>

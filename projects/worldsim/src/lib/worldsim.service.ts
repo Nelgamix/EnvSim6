@@ -24,7 +24,6 @@ export class WorldsimService {
     if (env.objects) {
       for (const o of env.objects) {
         switch (o.type) {
-          // Receivers
           case 'Lamp':
             this._world.addObject(new Lamp(o.name, new Position(o.position.x, o.position.y), o.color, o.intensity));
             break;
@@ -34,7 +33,6 @@ export class WorldsimService {
           case 'TV':
             this._world.addObject(new TV(o.name, new Position(o.position.x, o.position.y), o.channel, o.volume));
             break;
-          // Emitters
           case 'Thermometer':
             this._world.addObject(new Thermometer(o.name, new Position(o.position.x, o.position.y), o.temperature));
             break;
@@ -49,6 +47,10 @@ export class WorldsimService {
       for (const l of env.locations) {
         this._world.addLocation(this.constructLocation(l));
       }
+    }
+
+    if (env.scale && env.scale.x > 0 && env.scale.y > 0) {
+      this._world.scale = env.scale;
     }
 
     this._world.addObserver(this.modelChanged);

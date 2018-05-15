@@ -5,13 +5,13 @@ import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
   selector: 'app-show-map-object-template',
   styles: [`
     #display-top {
-      text-align: center;
       position: absolute;
       bottom: 100%;
       left: 0;
       right: 0;
       font-size: 12px;
       background-color: #828282;
+      color: transparent;
     }
     #display-bottom {
       text-align: center;
