@@ -11,13 +11,19 @@ import {Lamp} from '../../../projects/worldsim/src/lib/model/objects/Lamp';
       position: relative;
     }
     /* #t > div */
-    #t25, #t50, #t75, #t100, #tu {
+    #t25, #t50, #t75, #t100, #tu, #bg {
       position: absolute;
       top: 50%;
       left: 50%;
       border-radius: 50%;
       border: 1px dashed orange;
       transform: translate(-50%, -50%);
+    }
+    #bg {
+      border: none;
+      background-color: rgba(255,255,255,.1);
+      width: 100%;
+      height: 100%;
     }
     #tu {
       width: 37%;
@@ -45,6 +51,7 @@ import {Lamp} from '../../../projects/worldsim/src/lib/model/objects/Lamp';
   `],
   template: `
     <div id="t" [style.height]="dimens+'px'" [style.width]="dimens+'px'">
+      <div id="bg"></div>
       <div id="t25"></div>
       <div id="t50"></div>
       <div id="t75"></div>

@@ -6,10 +6,10 @@ import {Avatar} from '../../../projects/worldsim/src/lib/model/Avatar';
 @Component({
   selector: 'app-show-map-location',
   styles: [`
-    .ws-location {
+    .location {
       position: absolute;
     }
-    .ws-location::before {
+    .location::before {
       content: '';
       position: absolute;
       top: 0;
@@ -24,11 +24,7 @@ import {Avatar} from '../../../projects/worldsim/src/lib/model/Avatar';
       align-items: center;
       height: 100%;
     }
-    .ws-location-name {
-      /*position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);*/
+    .location-name {
       font-size: 130%;
       z-index: 1;
     }
@@ -44,17 +40,17 @@ import {Avatar} from '../../../projects/worldsim/src/lib/model/Avatar';
       z-index: 2;
       border: 2px solid red;
     }
-    .ws-avatar {
+    .avatar {
       cursor: pointer;
       text-align: center;
     }
-    .ws-avatar:hover {
+    .avatar:hover {
       color: red;
     }
   `],
   template: `
     <div
-        class="ws-location"
+        class="location"
         alx-dropzone
         (alx-ondrop)="dropped($event)"
         [style.background-color]="color"
@@ -70,9 +66,9 @@ import {Avatar} from '../../../projects/worldsim/src/lib/model/Avatar';
           [magnificationX]="magnificationX">
       </app-show-map-location>
       <div id="display" *ngIf="location.sublocations.length === 0">
-        <div class="ws-location-name">
+        <div class="location-name">
           <div style="font-weight: bold">{{location.name}}</div>
-          <div class="ws-avatar" *ngFor="let a of location.avatars" [alx-draggable]="{location: location, avatar: a}">
+          <div class="avatar" *ngFor="let a of location.avatars" [alx-draggable]="{location: location, avatar: a}">
             <i class="material-icons">person_pin</i>
             <span style="vertical-align: top">{{a.name}}</span>
           </div>
@@ -82,7 +78,7 @@ import {Avatar} from '../../../projects/worldsim/src/lib/model/Avatar';
   `
 })
 export class ShowMapLocationComponent {
-  color: string = Utils.randomColor(80);
+  color: string = Utils.randomColorHSL({min: 10, max: 15}, {min: 30, max: 40});
 
   @Input() location: Location;
   @Input() magnificationX: number;
@@ -90,6 +86,7 @@ export class ShowMapLocationComponent {
 
   @HostListener('click') onClick() {
     console.log(this.location.name);
+    console.log('Couleur générée: ' + this.color);
   }
 
   dropped(e: {location: Location, avatar: Avatar}) {

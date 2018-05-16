@@ -4,10 +4,6 @@ import {DecimalPipe} from '@angular/common';
 @Component({
   selector: 'app-show-map-slider',
   styles: [`
-    #span {
-      font-weight: bold;
-      color: #ffffff;
-    }
     #overlay {
       position: absolute;
       left: 0;

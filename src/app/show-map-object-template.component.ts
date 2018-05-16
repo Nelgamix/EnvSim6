@@ -54,7 +54,7 @@ import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
       </div>
       <div *ngIf="mOn && displayName != null"
            id="display-bottom">
-        <span style="font-weight: bold">{{displayName}}</span>
+        <span style="font-weight: bold; color: black;">{{displayName}}</span>
       </div>
     </div>
   `

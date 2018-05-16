@@ -3,21 +3,25 @@ import {World} from './model/World';
 import {Lamp} from './model/objects/Lamp';
 import {Position} from './model/Position';
 import {Avatar} from './model/Avatar';
-import {Location} from './model/Location';
 import {Speakers} from './model/objects/Speakers';
+import {Location} from './model/Location';
 import {TV} from './model/objects/TV';
 import {Thermometer} from './model/objects/Thermometer';
 import {LightSensor} from './model/objects/LightSensor';
 import {Obj} from './model/Obj';
+
+import {connect} from 'socket.io-client';
 
 @Injectable(/*{
   providedIn: WorldsimModule
 }*/)
 export class WorldsimService {
   private _world: World;
+  private _socket: SocketIOClient.Socket;
 
   constructor() {
     this._world = new World();
+    this._socket = connect('/simulator');
   }
 
   loadEnvironment(env: any): void {
@@ -54,6 +58,14 @@ export class WorldsimService {
     }
 
     this._world.addObserver(this.modelChanged);
+
+    const id: InitialDescription = {
+      simulatedEnvironmentName: env.name,
+      channels: [],
+      emitters: [],
+      eventers: []
+    };
+    this._socket.emit('initialDescription', id);
   }
 
   public modelChanged(e: any): void {
@@ -94,3 +106,26 @@ export class WorldsimService {
     );
   }
 }
+
+export type InitialDescription = {
+  simulatedEnvironmentName: string;
+  channels: ChannelOrEmitterInitialDescription[];
+  emitters: ChannelOrEmitterInitialDescription[];
+  eventers: EventerInitialDescription[];
+};
+
+type ChannelOrEmitterInitialDescription = {
+  id: string;
+  type: string;
+  value: any;
+};
+
+type EventerInitialDescription = {
+  id: string;
+  type: string;
+};
+
+type Update = {
+  id: string;
+  value: any;
+};

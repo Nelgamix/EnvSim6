@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {WorldsimService} from '../../projects/worldsim/src/lib/worldsim.service';
-import {Lamp} from '../../projects/worldsim/src/lib/model/objects/Lamp';
 import {Obj} from '../../projects/worldsim/src/lib/model/Obj';
 import {Location} from '../../projects/worldsim/src/lib/model/Location';
 import {environments} from './environments';
@@ -10,8 +9,8 @@ import {environments} from './environments';
   styles: [],
   template: `
     <b>{{ location.name }}</b> &rArr;
-    <span class="dimensions">{{location.width}}x{{location.height}}</span>
-    at <span class="location">({{location.position.x + ', ' + location.position.y}})</span>
+    <span class="list-dimensions">{{location.width}}x{{location.height}}</span>
+    at <span class="list-location">({{location.position.x + ', ' + location.position.y}})</span>
     <ul *ngIf="location.sublocations.length > 0">
       <li *ngFor="let l of location.sublocations">
         <app-show-location [location]="l"></app-show-location>

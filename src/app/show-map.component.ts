@@ -6,7 +6,8 @@ import {World} from '../../projects/worldsim/src/lib/model/World';
   styles: [`
     #container {
       position: relative;
-      border: 2px solid black
+      border: 2px solid black;
+      color: white;
     }
   `],
   template: `
