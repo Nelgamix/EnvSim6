@@ -1,9 +1,13 @@
 import {Position} from '../Position';
 import {Obj} from '../Obj';
+import {ChannelOrEmitterInitialDescription, InitialDescription, Update} from '../types';
 
 export class Lamp extends Obj {
   public static readonly INTENSITY_MIN = 0;
   public static readonly INTENSITY_MAX = 1;
+
+  private static readonly REGISTER_COLOR = 'lamp_color';
+  private static readonly REGISTER_INTENSITY = 'lamp_intensity';
 
   private _intensity: number;
   private _color: string;
@@ -36,5 +40,33 @@ export class Lamp extends Obj {
 
   modifyIntensity(modifier: number): void {
     this.intensity += modifier;
+  }
+
+  register(e: InitialDescription) {
+    const e1: ChannelOrEmitterInitialDescription = {
+      id: this.completedId(Lamp.REGISTER_INTENSITY),
+      type: 'number',
+      value: this.intensity
+    };
+    const e2: ChannelOrEmitterInitialDescription = {
+      id: this.completedId(Lamp.REGISTER_COLOR),
+      type: 'string',
+      value: this.color
+    };
+
+    e.channels.push(e1);
+    e.channels.push(e2);
+  }
+
+  update(u: Update): boolean {
+    if (u.id === this.completedId(Lamp.REGISTER_COLOR)) {
+      this.intensity = u.value;
+    } else if (u.id === this.completedId(Lamp.REGISTER_INTENSITY)) {
+      this.color = u.value;
+    } else {
+      return false;
+    }
+
+    return true;
   }
 }

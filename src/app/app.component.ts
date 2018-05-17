@@ -34,7 +34,7 @@ export class AppComponent {
   configure: Obj;
 
   constructor(public worldsimService: WorldsimService) {
-    this.worldsimService.loadEnvironment(environments.maison);
+    this.worldsimService.loadEnvironment(environments.find(p => p.name === 'Maison'));
     this.magnificationX = this.worldsimService.world.scale.x;
     this.magnificationY = this.worldsimService.world.scale.y;
   }

@@ -1,29 +1,32 @@
-export const environments = {
-  maison: {
-    'scale': {
-      'x': 2.6,
-      'y': 1.8
+import {JSONWorld} from '../../projects/worldsim/src/lib/model/World';
+
+export const environments: JSONWorld[] = [
+  {
+    name: 'Maison',
+    scale: {
+      x: 2.6,
+      y: 1.8
     },
-    'objects': [
+    objects: [
       {
-        'type': 'Lamp',
-        'position': {
-          'x': 260,
-          'y': 270
+        type: 'Lamp',
+        position: {
+          x: 260,
+          y: 270
         },
-        'name': 'Lampe du salon',
-        'color': '#fff',
-        'intensity': 0.8
+        name: 'Lampe du salon',
+        color: '#fff',
+        intensity: 0.8
       },
       {
-        'type': 'Lamp',
-        'position': {
-          'x': 4,
-          'y': 220
+        type: 'Lamp',
+        position: {
+          x: 4,
+          y: 220
         },
-        'name': 'Lampe de Chambre 1',
-        'color': '#f55',
-        'intensity': 0.5
+        name: 'Lampe de Chambre 1',
+        color: '#f55',
+        intensity: 0.5
       },
       {
         'type': 'Lamp',
@@ -55,7 +58,7 @@ export const environments = {
         'temperature': 22
       }
     ],
-    'locations': [
+    locations: [
       {
         'name': 'Entrée',
         'width': 80,
@@ -152,7 +155,8 @@ export const environments = {
       }
     ]
   },
-  appartement: {
+  {
+    name:  'Appart',
     scale: {
       x: 4,
       y: 4
@@ -202,4 +206,4 @@ export const environments = {
       }
     ]
   }
-};
+];

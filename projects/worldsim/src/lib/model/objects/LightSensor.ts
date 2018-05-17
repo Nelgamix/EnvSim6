@@ -1,9 +1,12 @@
 import {Position} from '../Position';
 import {Obj} from '../Obj';
+import {ChannelOrEmitterInitialDescription, InitialDescription, UpdateType} from '../types';
 
 export class LightSensor extends Obj {
   public static readonly LIGHT_MIN = 0;
   public static readonly LIGHT_MAX = 1;
+
+  private static readonly REGISTER_LIGHT = 'lightsensor_light';
 
   private _light: number;
 
@@ -24,7 +27,8 @@ export class LightSensor extends Obj {
     const ll = this._light;
     this._light = Math.max(LightSensor.LIGHT_MIN, Math.min(value, LightSensor.LIGHT_MAX));
     if (ll !== this._light) {
-      this.changed();
+      const u = {id: this.completedId(LightSensor.REGISTER_LIGHT), value: this._light};
+      this.sendUpdate(u, UpdateType.EMITTER);
     }
   }
 
@@ -33,5 +37,15 @@ export class LightSensor extends Obj {
       return;
     }
     this.light += modifier;
+  }
+
+  register(e: InitialDescription) {
+    const e1: ChannelOrEmitterInitialDescription = {
+      id: this.completedId(LightSensor.REGISTER_LIGHT),
+      type: 'number',
+      value: this.light
+    };
+
+    e.emitters.push(e1);
   }
 }

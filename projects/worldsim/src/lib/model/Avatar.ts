@@ -15,3 +15,7 @@ export class Avatar {
     return this._metadata;
   }
 }
+
+export type JSONAvatar = {
+  name: string;
+};

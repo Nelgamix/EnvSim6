@@ -86,7 +86,6 @@ export class ShowMapLocationComponent {
 
   @HostListener('click') onClick() {
     console.log(this.location.name);
-    console.log('Couleur générée: ' + this.color);
   }
 
   dropped(e: {location: Location, avatar: Avatar}) {

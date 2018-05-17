@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {World} from './model/World';
+import {JSONWorld, World} from './model/World';
 import {Lamp} from './model/objects/Lamp';
 import {Position} from './model/Position';
 import {Avatar} from './model/Avatar';
@@ -11,20 +11,40 @@ import {LightSensor} from './model/objects/LightSensor';
 import {Obj} from './model/Obj';
 
 import {connect} from 'socket.io-client';
+import {InitialDescription, Update, UpdateType} from './model/types';
 
+/**
+ * Entry point service for worldsim lib.
+ */
 @Injectable(/*{
   providedIn: WorldsimModule
 }*/)
 export class WorldsimService {
+  /**
+   * Namespace chosen in the server.
+   * @type {string}
+   */
+  private static readonly NAMESPACE = 'simulator';
+
+  /**
+   * Name of
+   * @type {string}
+   */
+  private static readonly EVENT_UPDATE_EMITTER = 'updateEmitter';
+  private static readonly EVENT_UPDATE_CHANNEL = 'updateChannel';
+  private static readonly EVENT_UPDATE_EVENTER = 'triggerEvent';
+  private static readonly EVENT_INITIALDESCRIPTION = 'initialDescription';
+
   private _world: World;
   private _socket: SocketIOClient.Socket;
 
   constructor() {
     this._world = new World();
-    this._socket = connect('/simulator');
+    this._socket = connect('/' + WorldsimService.NAMESPACE);
+    this._socket.on(WorldsimService.EVENT_UPDATE_CHANNEL, (u: Update) => this.receivedUpdate(u));
   }
 
-  loadEnvironment(env: any): void {
+  loadEnvironment(env: JSONWorld): void {
     if (env.objects) {
       for (const o of env.objects) {
         switch (o.type) {
@@ -57,7 +77,7 @@ export class WorldsimService {
       this._world.scale = env.scale;
     }
 
-    this._world.addObserver(this.modelChanged);
+    this._world.addObserver(this.sendUpdate.bind(this));
 
     const id: InitialDescription = {
       simulatedEnvironmentName: env.name,
@@ -65,13 +85,38 @@ export class WorldsimService {
       emitters: [],
       eventers: []
     };
-    this._socket.emit('initialDescription', id);
+
+    this._world.objects.forEach(o => o.register(id));
+
+    console.log(id);
+
+    this._socket.emit(WorldsimService.EVENT_INITIALDESCRIPTION, id);
   }
 
-  public modelChanged(e: any): void {
-    // Contact and send data to server about the object.
-    if (e instanceof Obj) {
-      console.log('Object changed.');
+  public sendUpdate(u: Update, t: UpdateType): void {
+    switch (t) {
+      case UpdateType.EMITTER:
+        this._socket.emit(WorldsimService.EVENT_UPDATE_EMITTER, u);
+        break;
+      case UpdateType.CHANNEL:
+        this._socket.emit(WorldsimService.EVENT_UPDATE_CHANNEL, u);
+        break;
+      case UpdateType.EVENT:
+        this._socket.emit(WorldsimService.EVENT_UPDATE_EVENTER, u);
+        break;
+      default:
+        console.error('Update type incorrect');
+        return;
+    }
+
+    console.log('Sent update.');
+  }
+
+  private receivedUpdate(u: Update) {
+    const objName = Obj.getObjName(u.id);
+    const o: Obj = this._world.objects.find(p => p.name === objName);
+    if (!o.update(u)) {
+      console.error('Could not find the right object to update!');
     }
   }
 
@@ -106,26 +151,3 @@ export class WorldsimService {
     );
   }
 }
-
-export type InitialDescription = {
-  simulatedEnvironmentName: string;
-  channels: ChannelOrEmitterInitialDescription[];
-  emitters: ChannelOrEmitterInitialDescription[];
-  eventers: EventerInitialDescription[];
-};
-
-type ChannelOrEmitterInitialDescription = {
-  id: string;
-  type: string;
-  value: any;
-};
-
-type EventerInitialDescription = {
-  id: string;
-  type: string;
-};
-
-type Update = {
-  id: string;
-  value: any;
-};

@@ -1,5 +1,5 @@
-import {Avatar} from './Avatar';
-import {Position} from './Position';
+import {Avatar, JSONAvatar} from './Avatar';
+import {JSONPosition, Position} from './Position';
 
 export class Location {
   private _name: string;
@@ -73,3 +73,12 @@ export class Location {
     this._avatars.splice(io, 1);
   }
 }
+
+export type JSONLocation = {
+  name: string;
+  width: number;
+  height: number;
+  position: JSONPosition;
+  avatars?: JSONAvatar[];
+  sublocations?: JSONLocation[];
+};

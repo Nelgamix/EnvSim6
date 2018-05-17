@@ -15,3 +15,8 @@ export class Position {
     return this._y;
   }
 }
+
+export type JSONPosition = {
+  x: number;
+  y: number;
+};

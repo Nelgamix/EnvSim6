@@ -1,12 +1,13 @@
-import {Location} from './Location';
+import {JSONLocation, Location} from './Location';
 import {Obj} from './Obj';
+import {Update, UpdateType} from './types';
 
 export class World {
   private readonly _locations: Location[];
   private readonly _objects: Obj[];
   private _scale: {x: number, y: number};
 
-  private readonly _observers: ((any) => void)[];
+  private readonly _observers: ((u: Update, t: UpdateType) => void)[];
 
   constructor() {
     this._locations = [];
@@ -20,10 +21,10 @@ export class World {
 
   public addObject(object: Obj) {
     this._objects.push(object);
-    object.onChanged = (o: Obj) => this.objectChanged(o);
+    object.onChanged = (u: Update, t: UpdateType) => this.sendUpdate(u, t);
   }
 
-  public addObserver(f: (any: any) => void): void {
+  public addObserver(f: (u: Update, t: UpdateType) => void): void {
     this._observers.push(f);
   }
 
@@ -57,10 +58,8 @@ export class World {
     return w;
   }
 
-  objectChanged(o: Obj): void {
-    for (const f of this._observers) {
-      f(o);
-    }
+  sendUpdate(u: Update, t: UpdateType): void {
+    this._observers.forEach(o => o(u, t));
   }
 
   set scale(scale: {x: number, y: number}) {
@@ -71,3 +70,10 @@ export class World {
     return this._scale;
   }
 }
+
+export type JSONWorld = {
+  name: string;
+  scale?: {x: number, y: number};
+  objects: any[]; // preciser?
+  locations: JSONLocation[];
+};

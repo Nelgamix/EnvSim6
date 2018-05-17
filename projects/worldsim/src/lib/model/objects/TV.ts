@@ -1,5 +1,6 @@
 import {Position} from '../Position';
 import {Obj} from '../Obj';
+import {ChannelOrEmitterInitialDescription, InitialDescription, Update} from '../types';
 
 export class TV extends Obj {
   public static readonly VOLUME_MIN = 0;
@@ -7,6 +8,9 @@ export class TV extends Obj {
 
   public static readonly CHANNEL_MIN = 0;
   public static readonly CHANNEL_MAX = 18;
+
+  private static readonly REGISTER_CHANNEL = 'tv_channel';
+  private static readonly REGISTER_VOLUME = 'tv_volume';
 
   private _channel: number;
   private _volume: number;
@@ -39,5 +43,33 @@ export class TV extends Obj {
 
   modifyVolume(modifier: number): void {
     this.volume += modifier;
+  }
+
+  register(e: InitialDescription) {
+    const e1: ChannelOrEmitterInitialDescription = {
+      id: this.completedId(TV.REGISTER_CHANNEL),
+      type: 'number',
+      value: this.channel
+    };
+    const e2: ChannelOrEmitterInitialDescription = {
+      id: this.completedId(TV.REGISTER_VOLUME),
+      type: 'string',
+      value: this.volume
+    };
+
+    e.channels.push(e1);
+    e.channels.push(e2);
+  }
+
+  update(u: Update): boolean {
+    if (u.id === this.completedId(TV.REGISTER_VOLUME)) {
+      this.volume = u.value;
+    } else if (u.id === this.completedId(TV.REGISTER_CHANNEL)) {
+      this.channel = u.value;
+    } else {
+      return false;
+    }
+
+    return true;
   }
 }
