@@ -1,8 +1,11 @@
 import {JSONLocation, Location} from './Location';
 import {Obj} from './Obj';
 import {Update, UpdateType} from './types';
+import {Avatar} from './Avatar';
 
 export class World {
+  public static readonly REGISTER_SEPARATOR = '::';
+
   private readonly _locations: Location[];
   private readonly _objects: Obj[];
   private _scale: {x: number, y: number};
@@ -17,6 +20,7 @@ export class World {
 
   public addLocation(location: Location) {
     this._locations.push(location);
+    location.avatars.forEach(a => a.onChanged = (u: Update, t: UpdateType) => this.sendUpdate(u, t));
   }
 
   public addObject(object: Obj) {
@@ -68,6 +72,12 @@ export class World {
 
   get scale(): { x: number; y: number } {
     return this._scale;
+  }
+
+  get avatars(): Avatar[] {
+    const avatars = [];
+    this._locations.forEach(l => l.avatars.forEach(a => avatars.push(a)));
+    return avatars;
   }
 }
 

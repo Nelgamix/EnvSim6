@@ -1,9 +1,8 @@
 import {Position} from './Position';
 import {InitialDescription, Update, UpdateType} from './types';
+import {World} from './World';
 
 export class Obj {
-  private static readonly REGISTER_SEPARATOR = '::';
-
   private _name: string;
   private _position: Position;
   private _onChanged: (u: Update, t: UpdateType) => void;
@@ -14,7 +13,7 @@ export class Obj {
   }
 
   static getObjName(id: string): string {
-    return id.split(this.REGISTER_SEPARATOR)[0];
+    return id.split(World.REGISTER_SEPARATOR)[0];
   }
 
   get name(): string {
@@ -41,6 +40,6 @@ export class Obj {
   }
 
   protected completedId(s: string): string {
-    return this.name + Obj.REGISTER_SEPARATOR + s;
+    return 'Object' + World.REGISTER_SEPARATOR + this.name + World.REGISTER_SEPARATOR + s;
   }
 }

@@ -87,6 +87,7 @@ export class WorldsimService {
     };
 
     this._world.objects.forEach(o => o.register(id));
+    this._world.avatars.forEach(o => o.register(id));
 
     console.log(id);
 
@@ -130,7 +131,7 @@ export class WorldsimService {
 
     if (sl.avatars) {
       for (const p of sl.avatars) {
-        ps.push(new Avatar(p.name, (p.metadata ? p.metadata : undefined)));
+        ps.push(new Avatar(p.name, sl.name, (p.metadata ? p.metadata : undefined)));
       }
     }
 

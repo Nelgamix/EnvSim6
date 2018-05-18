@@ -58,6 +58,7 @@ export class Location {
 
   addAvatar(p: Avatar) {
     this._avatars.push(p);
+    p.changeLocation(this);
   }
 
   addSublocation(sl: Location) {
