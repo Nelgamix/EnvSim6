@@ -1,4 +1,4 @@
-import {JSONLocation, Location} from './Location';
+import {Location} from './Location';
 import {Obj} from './Obj';
 import {Update, UpdateType} from './types';
 import {Avatar} from './Avatar';
@@ -16,6 +16,7 @@ export class World {
     this._locations = [];
     this._objects = [];
     this._observers = [];
+    this._scale = {x: 1, y: 1};
   }
 
   public addLocation(location: Location) {
@@ -32,12 +33,10 @@ export class World {
     this._observers.push(f);
   }
 
-  get locations(): Location[] {
-    return this._locations;
-  }
-
-  get objects(): Obj[] {
-    return this._objects;
+  public clean(): void {
+    this._objects.splice(0, this._objects.length);
+    this._locations.splice(0, this._locations.length);
+    this._scale = {x: 1, y: 1};
   }
 
   calculateHeight(): number {
@@ -66,8 +65,12 @@ export class World {
     this._observers.forEach(o => o(u, t));
   }
 
-  set scale(scale: {x: number, y: number}) {
-    this._scale = scale;
+  get locations(): Location[] {
+    return this._locations;
+  }
+
+  get objects(): Obj[] {
+    return this._objects;
   }
 
   get scale(): { x: number; y: number } {
@@ -79,11 +82,8 @@ export class World {
     this._locations.forEach(l => l.avatars.forEach(a => avatars.push(a)));
     return avatars;
   }
-}
 
-export type JSONWorld = {
-  name: string;
-  scale?: {x: number, y: number};
-  objects: any[]; // preciser?
-  locations: JSONLocation[];
-};
+  set scale(scale: {x: number, y: number}) {
+    this._scale = scale;
+  }
+}

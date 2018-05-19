@@ -22,6 +22,19 @@ export class Lamp extends Obj {
     return o instanceof Lamp;
   }
 
+  static constructFrom(o: any): Lamp | null {
+    const name = o.name;
+    const position = Position.constructFrom(o.position);
+    const color = o.color;
+    const intensity = o.intensity;
+
+    if (name === null || position === null || color === null || intensity === null) {
+      return null;
+    }
+
+    return new Lamp(name, position, color, intensity);
+  }
+
   get intensity(): number {
     return this._intensity;
   }

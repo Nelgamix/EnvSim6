@@ -1,4 +1,4 @@
-import {JSONWorld} from '../../projects/worldsim/src/lib/model/World';
+import {JSONWorld} from '../../projects/worldsim/src/lib/model/types';
 
 export const environments: JSONWorld[] = [
   {

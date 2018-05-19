@@ -28,7 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## TODO
 
-* Environment switcher
+* Environment switcher??
 * Location "outside" pour pouvoir enlever les personnages de la map
 * Blocage de la config des objects non configurables
 * Objet TV: ajout media/etat lecture (play, pause, ...), prévisu de l'état de lecture
@@ -40,22 +40,3 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * [Material Components](https://material.angular.io/components/categories)
 
 * [Tacthab2](https://github.com/AlexDmr/tacthab2)
-
-connection socket -> NAME "simulator" (`const s = io("simulator")`)
-
-Socket -> envoyer
-initialDescription: {
-  channel[], event[], emitter[]
-  forme emitter/channel: type, id, value
-  forme event: id, type
-}
-
-messages (envoi):
-* updateChannel: {id: string, value: any} // plus tard
-* updateEmitter: {id: string, value: any}
-* triggerEvent: {id: string, value: any}
-
-message (reception):
-* updateChannel: {id: string, value: any}
-
-

@@ -25,6 +25,19 @@ export class TV extends Obj {
     return o instanceof TV;
   }
 
+  static constructFrom(o: any): TV | null {
+    const name = o.name;
+    const position = Position.constructFrom(o.position);
+    const channel = o.channel;
+    const volume = o.volume;
+
+    if (name === null || position === null || channel === null || volume === null) {
+      return null;
+    }
+
+    return new TV(name, position, channel, volume);
+  }
+
   get channel(): number {
     return this._channel;
   }

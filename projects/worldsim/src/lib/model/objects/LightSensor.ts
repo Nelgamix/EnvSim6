@@ -19,6 +19,18 @@ export class LightSensor extends Obj {
     return o instanceof LightSensor;
   }
 
+  static constructFrom(o: any): LightSensor | null {
+    const name = o.name;
+    const position = Position.constructFrom(o.position);
+    const light = o.light;
+
+    if (name === null || position === null || light === null) {
+      return null;
+    }
+
+    return new LightSensor(name, position, light);
+  }
+
   get light(): number {
     return this._light;
   }

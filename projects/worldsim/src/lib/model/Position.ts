@@ -7,6 +7,17 @@ export class Position {
     this._y = y;
   }
 
+  static constructFrom(o: any): Position | null {
+    const x = o.x;
+    const y = o.y;
+
+    if (x === null || y === null) {
+      return null;
+    }
+
+    return new Position(x, y);
+  }
+
   get x(): number {
     return this._x;
   }
@@ -15,8 +26,3 @@ export class Position {
     return this._y;
   }
 }
-
-export type JSONPosition = {
-  x: number;
-  y: number;
-};

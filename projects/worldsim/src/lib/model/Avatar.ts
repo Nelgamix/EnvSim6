@@ -61,7 +61,3 @@ export class Avatar {
     this._onChanged(u, UpdateType.EMITTER);
   }
 }
-
-export type JSONAvatar = {
-  name: string;
-};

@@ -19,6 +19,18 @@ export class Thermometer extends Obj {
     return o instanceof Thermometer;
   }
 
+  static constructFrom(o: any): Thermometer | null {
+    const name = o.name;
+    const position = Position.constructFrom(o.position);
+    const temperature = o.temperature;
+
+    if (name === null || position === null || temperature === null) {
+      return null;
+    }
+
+    return new Thermometer(name, position, temperature);
+  }
+
   set temperature(value: number) {
     const lt = this._temperature;
     this._temperature = Math.max(Thermometer.TEMPERATURE_MIN, Math.min(value, Thermometer.TEMPERATURE_MAX));

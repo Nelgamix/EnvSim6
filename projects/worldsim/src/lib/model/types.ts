@@ -26,3 +26,46 @@ export enum UpdateType {
   CHANNEL,
   EVENT
 }
+
+export interface JSONWorld {
+  name: string;
+  scale?: JSONScale;
+  objects: JSONObj[];
+  locations: JSONLocation[];
+}
+
+export interface JSONScale {
+  x: number;
+  y: number;
+}
+
+export interface JSONPosition {
+  x: number;
+  y: number;
+}
+
+export interface JSONLocation {
+  name: string;
+  width: number;
+  height: number;
+  position: JSONPosition;
+  avatars?: JSONAvatar[];
+  sublocations?: JSONLocation[];
+}
+
+export interface JSONAvatar {
+  name: string;
+}
+
+export interface JSONObj {
+  name: string;
+  type: string;
+  position: JSONPosition;
+  // Individual properties
+  color?: string;
+  intensity?: number;
+  volume?: number;
+  light?: number;
+  channel?: number;
+  temperature?: number;
+}

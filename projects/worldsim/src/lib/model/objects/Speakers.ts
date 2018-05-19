@@ -15,6 +15,18 @@ export class Speakers extends Obj {
     this._volume = volume;
   }
 
+  static constructFrom(o: any): Speakers | null {
+    const name = o.name;
+    const position = Position.constructFrom(o.position);
+    const volume = o.volume;
+
+    if (name === null || position === null || volume === null) {
+      return null;
+    }
+
+    return new Speakers(name, position, volume);
+  }
+
   get volume(): number {
     return this._volume;
   }
