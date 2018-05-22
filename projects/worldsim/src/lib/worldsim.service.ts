@@ -59,7 +59,7 @@ export class WorldsimService {
     this._socket = connect('/' + WorldsimService.NAMESPACE);
 
     // Setup listeners on the socket
-    this._socket.on('connected', () => {
+    this._socket.on('connect', () => {
       this._isConnected = true;
 
       // Send initial description if we did not send it already.
@@ -67,7 +67,7 @@ export class WorldsimService {
         this.sendInitialDescription();
       }
     });
-    this._socket.on('disconnected', () => this._isConnected = false);
+    this._socket.on('disconnect', () => this._isConnected = false);
     this._socket.on(WorldsimService.EVENT_UPDATE_CHANNEL, (u: Update) => this.receivedUpdate(u));
   }
 
@@ -148,8 +148,6 @@ export class WorldsimService {
 
     this._world.objects.forEach(o => o.register(id));
     this._world.avatars.forEach(o => o.register(id));
-
-    console.log(id);
 
     this._initialDescription = id;
 
