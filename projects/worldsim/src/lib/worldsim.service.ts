@@ -8,6 +8,7 @@ import {TV} from './model/objects/TV';
 import {Thermometer} from './model/objects/Thermometer';
 import {LightSensor} from './model/objects/LightSensor';
 import {Obj} from './model/Obj';
+import {Position} from './model/Position';
 
 import {connect} from 'socket.io-client';
 import {InitialDescription, JSONWorld, Update, UpdateType} from './model/types';
@@ -111,6 +112,19 @@ export class WorldsimService {
     // Init locations
     for (const l of env.locations) {
       this._world.addLocation(this.constructLocation(l));
+    }
+    if (!this._world.locations.find(l => l.name === 'Outside')) {
+      const w = this._world.calculateWidth();
+      const h = this._world.calculateHeight();
+      const l = new Location(
+        'Outside',
+        w,
+        h / 3,
+        new Position(0, h),
+        undefined,
+        [],
+        []);
+      this._world.addLocation(l);
     }
 
     // Search for a valid scale

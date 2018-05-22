@@ -21,7 +21,7 @@ export class World {
 
   public addLocation(location: Location) {
     this._locations.push(location);
-    location.avatars.forEach(a => a.onChanged = (u: Update, t: UpdateType) => this.sendUpdate(u, t));
+    location.avatarsRec.forEach(a => a.onChanged = (u: Update, t: UpdateType) => this.sendUpdate(u, t));
   }
 
   public addObject(object: Obj) {
@@ -79,7 +79,8 @@ export class World {
 
   get avatars(): Avatar[] {
     const avatars = [];
-    this._locations.forEach(l => l.avatars.forEach(a => avatars.push(a)));
+    this._locations.forEach(l => l.avatarsRec.forEach(a => avatars.push(a)));
+    console.log(avatars);
     return avatars;
   }
 

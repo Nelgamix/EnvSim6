@@ -28,8 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## TODO
 
-* Environment switcher??
-* Location "outside" pour pouvoir enlever les personnages de la map
+* Environment switcher?? / Chooser
 * Blocage de la config des objects non configurables
 * Objet TV: ajout media/etat lecture (play, pause, ...), prévisu de l'état de lecture
 * Refaire config pour ne pas enregistrer les changements en temps réel

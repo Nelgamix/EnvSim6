@@ -52,6 +52,13 @@ export class Location {
     return this._avatars;
   }
 
+  get avatarsRec(): Avatar[] {
+    let as = [];
+    this._avatars.forEach(a => as.push(a));
+    this._sublocations.forEach(l => as = as.concat(l.avatarsRec));
+    return as;
+  }
+
   get sublocations(): Location[] {
     return this._sublocations;
   }
